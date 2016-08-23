@@ -16,17 +16,22 @@ app.use(configureServer());
 // console.log('process', process);
 // console.log('processproces', process.process);
 console.log('----------- BEGIN ----------------');
+let PORT = 5000;
 for(var key in process) {
   if(key === 'env') {
     console.log(key, process[key]);
     console.log('---- BEGIN', key, '----');
     for(var key2 in process[key]) {
-      console.log(key2, process[key][key2]);
+      if(key2 === 'PORT') {
+        PORT = process[key][key2];
+        console.log(key2, process[key][key2]);
+      }
     }
     console.log('---- END', key, '-----')
   }
 }
 console.log('----------- END ----------------');
+console.log('DEF PORT:', PORT);
 // console.log('process env 2', process.env);
 // console.log('port 2', process.env.PORT);
 // console.log('title', process.title);
