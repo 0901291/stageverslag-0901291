@@ -22,6 +22,14 @@ app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 app.set('port', (process.env.PORT || 8080));
 
+exports.isProd = process.env.NODE_ENV === 'production';
+exports.isHeroku = process.env.DYNO;
+exports.host = undefined;
+exports.ports = {
+  http: exports.isProd ? process.env.PORT || 80 : 9100,
+  https: exports.isProd ? process.env.PORT || 443 : 9101
+};
+
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
     if (err) {
