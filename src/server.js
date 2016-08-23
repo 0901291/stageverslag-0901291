@@ -14,6 +14,7 @@ app.use(configureServer());
 
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
+app.set('port', PORT);
 
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
