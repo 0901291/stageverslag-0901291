@@ -22,8 +22,13 @@ const clientConfig = {
         loaders: ['react-hot', 'babel']
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(['css', 'sass'])
+        test: [/\.css$/, /\.scss$/],
+        loader: ExtractTextPlugin.extract('style-loader',
+          'css-loader?sourceMap!sass-loader?outputStyle=expanded&sourceMap=true&sourceMapContents=true')
+      },
+      {
+        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader',
       }
     ]
   }

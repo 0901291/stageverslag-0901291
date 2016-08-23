@@ -1,21 +1,27 @@
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
 import configureStore from './store/configureStore';
-import routes from './routes.js';
-import reducers from './reducers';
+import {Provider} from 'react-redux';
+import { Router, browserHistory } from 'react-router';
+import routes from './routes';
+import {loadCourses} from './actions/courseActions';
+import {loadAuthors} from './actions/authorActions';
+import './styles/styles.css'; // Webpack can import CSS files too!
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/toastr/build/toastr.min.css';
+
 
 // Get the initial state of the app injected at server render.
 const initialState = window.INITIAL_STATE; //
 const store = configureStore(initialState);
 
-/**
- * Provider wraps the store around the application.
- **/
+store.dispatch(loadCourses());
+store.dispatch(loadAuthors());
+
 render(
   <Provider store={store}>
-    <Router routes={routes} history={browserHistory} />
+      <Router history={browserHistory} routes={routes} />
   </Provider>,
   document.getElementById('app')
 );
