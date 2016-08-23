@@ -11,16 +11,16 @@ const app = express();
 
 app.use(configureServer());
 
-let PORT = 5000;
-for(var key in process) {
-  if(key === 'env') {
-    PORT = process[key].port;
-  }
-}
+// let PORT = 5000;
+// for(var key in process) {
+//   if(key === 'env') {
+//     PORT = process[key].port;
+//   }
+// }
 
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
-app.set('port', (process.env.PORT || PORT || 5000));
+app.set('port', (process.env.PORT || 5000));
 
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
