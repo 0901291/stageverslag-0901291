@@ -2,7 +2,8 @@
   "name": "stageverslag-0901291",
   "version": "1.0.0",
   "scripts": {
-    "start": "npm run serve",
+    "postinstall": "npm run build",
+    "start": "node --optimize_for_size --max_old_space_size=460 --gc_interval=100 dist/server.bundle.js",
     "serve": "NODE_ENV=development babel-node ./src/server.js",
     "build": "NODE_ENV=production webpack --config ./tools/webpack/webpack.config.js",
     "clean": "rimraf dist"
