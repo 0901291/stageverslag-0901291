@@ -44,9 +44,7 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "toastr": "^2.1.2",
-    "webpack": "1.13.0"
-  },
-  "devDependencies": {
+    "webpack": "1.13.0",
     "eslint": "^2.11.0",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.8.1",
