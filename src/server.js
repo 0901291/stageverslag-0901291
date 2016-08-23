@@ -18,8 +18,6 @@ for(var key in process) {
   }
 }
 
-console.log(process.env);
-
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 app.set('port', (process.env.PORT || PORT || 5000));
