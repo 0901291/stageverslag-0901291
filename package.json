@@ -6,7 +6,7 @@
     "start": "npm run serve:prod",
     "serve": "NODE_ENV=development babel-node ./src/server.js",
     "serve:prod": "echo 'start';node --optimize_for_size --max_old_space_size=460 --gc_interval=100 ./dist/server.bundle.js",
-    "build": "echo 'build';webpack --config ./tools/webpack/webpack.config.js",
+    "build": "echo 'build';NODE_ENV=production webpack --config ./tools/webpack/webpack.config.js",
     "clean": "rimraf dist"
   },
   "engines": {
