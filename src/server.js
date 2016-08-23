@@ -13,11 +13,13 @@ app.use(configureServer());
 
 // console.log('port 1', process.env.PORT);
 // console.log('pocess env 1', process.env);
-console.log('process', process);
-console.log('processproces', process.process);
+// console.log('process', process);
+// console.log('processproces', process.process);
+console.log('----------- BEGIN ----------------');
 for(var key in process) {
   console.log(key, process[key]);
 }
+console.log('----------- END ----------------');
 // console.log('process env 2', process.env);
 // console.log('port 2', process.env.PORT);
 // console.log('title', process.title);
