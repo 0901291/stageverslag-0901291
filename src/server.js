@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer.js';
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(configureServer());
