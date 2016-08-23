@@ -11,6 +11,7 @@ const clientConfig = {
     filename: 'bundle.js'
   },
   target: 'web',
+  devtool: 'source-map',
   plugins: [
     new ExtractTextPlugin('style.css')
   ],

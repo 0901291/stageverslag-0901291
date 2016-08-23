@@ -12,7 +12,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 
 // Get the initial state of the app injected at server render.
-const initialState = window.INITIAL_STATE; //
+const initialState = window.INITIAL_STATE;
 const store = configureStore(initialState);
 
 store.dispatch(loadCourses());

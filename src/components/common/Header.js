@@ -1,17 +1,32 @@
 import React, {PropTypes} from 'react';
 import { Link, IndexLink } from 'react-router';
 import LoadingDots from './LoadingDots';
-const Header = ({loading}) => {
-    return (
-        <nav>
-            <IndexLink to="/" activeClassName="active">Home</IndexLink>
-            {" | "}
-            <IndexLink to="/courses" activeClassName="active">Courses</IndexLink>
-            {" | "}
-            <IndexLink to="/about" activeClassName="active">About</IndexLink>
-            {loading && <LoadingDots interval={100} dots={20} />}
-        </nav>
-    );
+
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { appIsMounted: false };
+    }
+
+    componentDidMount() {
+        requestAnimationFrame(() => {
+            this.setState({ appIsMounted: true });
+        });
+    }
+
+    render() {
+        return (
+          <nav>
+              <IndexLink to="/" activeClassName="active">Home</IndexLink>
+              {" | "}
+              <IndexLink to="/courses" activeClassName="active">Courses</IndexLink>
+              {" | "}
+              <IndexLink to="/about" activeClassName="active">About</IndexLink>
+              {this.state.appIsMounted && this.props.loading && <LoadingDots interval={100} dots={20} />}
+          </nav>
+        );
+    }
+
 };
 
 Header.propTypes = {

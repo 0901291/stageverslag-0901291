@@ -5,7 +5,8 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
 import routes from './routes';
-import configureServer from '../tools/server/configureServer.js';
+import configureServer from '../tools/server/configureServer';
+import initialState from './reducers/initialState';
 
 const app = express();
 
@@ -23,8 +24,7 @@ app.get('*', (req, res) => {
       res.status(404).render('404');
     } else {
       // Set initialState here if needed.
-      const initialState = {};
-      
+
       const store = configureStore(initialState);
       const react = (
         <Provider store={store}>
@@ -34,6 +34,8 @@ app.get('*', (req, res) => {
 
       const reactString = renderToString(react);
       const finalState = store.getState();
+
+      console.log('finalState', finalState);
 
       res.render('index', { reactString, finalState });
     }
