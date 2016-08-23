@@ -7,7 +7,7 @@ const IS_DEV = process.env.NODE_ENV !== 'production';
 
 export default function configureServer() {
   const app = express();
-
+  console.log("process env", process.env.NODE_ENV);
   if (IS_DEV) {
     app.use(developmentMiddleware(config));
   } else {
