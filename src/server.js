@@ -18,6 +18,11 @@ app.use(configureServer());
 console.log('----------- BEGIN ----------------');
 for(var key in process) {
   console.log(key, process[key]);
+  console.log('---- BEGIN', key, '----')
+  for(var key2 in process[key]) {
+    console.log(key2, process[key][key2]);
+  }
+  console.log('---- END', key, '-----')
 }
 console.log('----------- END ----------------');
 // console.log('process env 2', process.env);
