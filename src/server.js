@@ -7,14 +7,13 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer.js';
 
-const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(configureServer());
 
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
-app.set('port', PORT);
+app.set('port', (process.env.PORT || 5000));
 
 app.get('*', (req, res) => {
   match({ routes, location: req.url }, (err, redirect, props) => {
@@ -41,10 +40,10 @@ app.get('*', (req, res) => {
   });
 });
 
-app.listen(PORT, error => {
+app.listen(app.get('port'), error => {
   if (error) {
     console.log(error);  // eslint-disable-line no-console
   } else {
-    console.log(`Listening at port ${PORT}`);
+    console.log(`Listening at port ${app.get('port')}`);
   }
 });
