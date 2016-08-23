@@ -17,8 +17,8 @@ app.use(configureServer());
 // console.log('processproces', process.process);
 console.log('----------- BEGIN ----------------');
 for(var key in process) {
-  console.log(key, process[key]);
   if(key === 'env') {
+    console.log(key, process[key]);
     console.log('---- BEGIN', key, '----');
     for(var key2 in process[key]) {
       console.log(key2, process[key][key2]);
