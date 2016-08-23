@@ -12,8 +12,9 @@ const app = express();
 app.use(configureServer());
 
 console.log('port 1', process.env.PORT);
+console.log('pocess env 1', process.env);
 console.log('process', process);
-console.log('process env', process.env);
+console.log('process env 2', process.env);
 console.log('port 2', process.env.PORT);
 console.log('title', process.title);
 console.log('env', process.env.NODE_ENV);
