@@ -11,6 +11,13 @@ const app = express();
 
 app.use(configureServer());
 
+console.log('process', process);
+console.log('process env', process.env);
+console.log('title', process.title);
+console.log('env', process.env.NODE_ENV);
+console.log('port', process.env.PORT);
+console.log('port or', process.env.PORT || 1234);
+
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
 app.set('port', (process.env.PORT || 8080));
