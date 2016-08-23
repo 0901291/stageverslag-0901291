@@ -14,13 +14,11 @@ app.use(configureServer());
 let PORT = 5000;
 for(var key in process) {
   if(key === 'env') {
-    for(var key2 in process[key]) {
-      if(key2 === 'PORT') {
-        PORT = process[key][key2];
-      }
-    }
+    PORT = process[key].port;
   }
 }
+
+console.log(process.env);
 
 app.set('view engine', 'pug');
 app.set('views', `${__dirname}/views`);
