@@ -1,12 +1,12 @@
-import {combineReducers} from 'redux';
-import courses from './courseReducer';
-import authors from './authorReducer';
-import numAjaxCallsInProgress from './ajaxStatusReducer';
+/**
+ * Import reducers here and afterwards include them in the combineReducers
+ * method.
+ **/
+import { combineReducers } from 'redux';
 
-const rootReducer = combineReducers({
-    courses,
-    authors,
-    numAjaxCallsInProgress
+/**
+ * Replace courses for an actual reducer.
+ **/
+export default combineReducers({
+  fakeReducer: (state = []) => state
 });
-
-export default rootReducer;
