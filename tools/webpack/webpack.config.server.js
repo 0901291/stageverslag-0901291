@@ -10,6 +10,7 @@ const serverConfig = {
     path: `${__dirname}/../../dist`,
     filename: 'server.bundle.js'
   },
+  devtool: 'source-map',
   target: 'node',
   plugins: [
     new CopyWebpackPlugin([{

@@ -19,10 +19,12 @@ class Header extends React.Component {
           <nav>
               <IndexLink to="/" activeClassName="active">Home</IndexLink>
               {" | "}
-              <IndexLink to="/courses" activeClassName="active">Courses</IndexLink>
+              <IndexLink to="/logs" activeClassName="active">Logs</IndexLink>
               {" | "}
-              <IndexLink to="/about" activeClassName="active">About</IndexLink>
-              {this.state.appIsMounted && this.props.loading && <LoadingDots interval={100} dots={20} />}
+              <IndexLink to="/achievements" activeClassName="active">Achievements</IndexLink>
+              {" | "}
+              <IndexLink to="/pages" activeClassName="active">Pages</IndexLink>
+              {/*{this.state.appIsMounted && this.props.loading && <LoadingDots interval={100} dots={20} />}*/}
           </nav>
         );
     }

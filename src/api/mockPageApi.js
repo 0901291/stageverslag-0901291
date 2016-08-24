@@ -5,44 +5,36 @@ import delay from './delay';
 // All calls return promises.
 const pages = [
   {
-    id: "react-flux-building-applications",
-    title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/pages/react-flux-building-applications",
-    authorId: "cory-house",
-    length: "5:08",
-    category: "JavaScript"
+    id: "home",
+    title: "Home",
+    body: "This site gives you a 'behind the scenes' of my internship at Burst...",
+    type: "basic",
+    overview_type: "",
+    access: "true"
   },
   {
-    id: "clean-code",
-    title: "Clean Code: Writing Code for Humans",
-    watchHref: "http://www.pluralsight.com/pages/writing-clean-code-humans",
-    authorId: "cory-house",
-    length: "3:10",
-    category: "Software Practices"
+    id: "logs",
+    title: "Blog",
+    body: "Read about my days at Burst...",
+    type: "overview",
+    overview_type: "log",
+    access: "true"
   },
   {
-    id: "architecture",
-    title: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/pages/architecting-applications-dotnet",
-    authorId: "cory-house",
-    length: "2:52",
-    category: "Software Architecture"
+    id: "achievements",
+    title: "Achievements",
+    body: "Read about my accomplished and yet to accomplish achievements during my internship at Burst...",
+    type: "overview",
+    overview_type: "achievement",
+    access: "true"
   },
   {
-    id: "career-reboot-for-developer-mind",
-    title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/pages/career-reboot-for-developer-mind",
-    authorId: "cory-house",
-    length: "2:30",
-    category: "Career"
-  },
-  {
-    id: "web-components-shadow-dom",
-    title: "Web Component Fundamentals",
-    watchHref: "http://www.pluralsight.com/pages/web-components-shadow-dom",
-    authorId: "cory-house",
-    length: "5:10",
-    category: "HTML5"
+    id: "pages",
+    title: "Pages",
+    body: "Manage pages of internshipship site",
+    type: "overview",
+    overview_type: "page",
+    access: "false"
   }
 ];
 
@@ -81,7 +73,6 @@ class PageApi {
           //The server would generate ids and watchHref's for new pages in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
           page.id = generateId(page);
-          page.watchHref = `http://www.pluralsight.com/pages/${page.id}`;
           pages.push(page);
         }
 

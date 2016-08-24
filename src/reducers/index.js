@@ -1,11 +1,13 @@
 import {combineReducers} from 'redux';
-import courses from './courseReducer';
-import authors from './authorReducer';
+import achievements from './achievementReducer';
+import pages from './pageReducer';
+import logs from './logReducer';
 import numAjaxCallsInProgress from './ajaxStatusReducer';
 
 const rootReducer = combineReducers({
-    courses,
-    authors,
+    achievements,
+    pages,
+    logs,
     numAjaxCallsInProgress
 });
 

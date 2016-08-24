@@ -5,18 +5,19 @@ import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
-import {loadCourses} from './actions/courseActions';
-import {loadAuthors} from './actions/authorActions';
-import './styles/styles.css'; // Webpack can import CSS files too!
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/toastr/build/toastr.min.css';
+import {loadAchievements} from './actions/achievementActions';
+import {loadPages} from './actions/pageActions';
+import {loadLogs} from './actions/logActions';
+
+import './styles/styles.scss';
 
 // Get the initial state of the app injected at server render.
 const initialState = window.INITIAL_STATE;
 const store = configureStore(initialState);
 
-store.dispatch(loadCourses());
-store.dispatch(loadAuthors());
+store.dispatch(loadAchievements());
+store.dispatch(loadPages());
+store.dispatch(loadLogs());
 
 render(
   <Provider store={store}>
