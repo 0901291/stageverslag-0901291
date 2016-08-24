@@ -35,8 +35,6 @@ app.get('*', (req, res) => {
       const reactString = renderToString(react);
       const finalState = store.getState();
 
-      console.log('finalState', finalState);
-
       res.render('index', { reactString, finalState });
     }
   });

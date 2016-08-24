@@ -1,5 +1,6 @@
 export default {
-    authors: [],
-    courses: [],
+    achievements: [],
+    logs: [],
+    pages: [],
     numAjaxCallsInProgress: 0
 };
