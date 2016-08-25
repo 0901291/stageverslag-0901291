@@ -28,7 +28,7 @@ const PageForm = ({page, pageTypes, overviewTypes, onSave, onChange, saving, err
               defaultOption="Select Overview type"
               options={overviewTypes}
               onChange={onChange}
-              className={page.type !== 'overview' ? ['hidden'] : []}
+              wrapperClass={page.type !== 'overview' ? ['hidden'] : []}
               error={errors.overview_type}/>
 
             <TextInput
@@ -42,7 +42,7 @@ const PageForm = ({page, pageTypes, overviewTypes, onSave, onChange, saving, err
               type="checkbox"
               name="access"
               label="Accessible page (uncheck to make page login protected)"
-              value={page.access}
+              checked={page.access}
               onChange={onChange}
               error={errors.access}/>
 
@@ -50,7 +50,7 @@ const PageForm = ({page, pageTypes, overviewTypes, onSave, onChange, saving, err
               type="checkbox"
               name="show_nav"
               label="Show in navigation"
-              value={page.show_nav}
+              checked={page.show_nav}
               onChange={onChange}
               error={errors.show_nav}/>
 

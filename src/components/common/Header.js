@@ -14,7 +14,10 @@ class Header extends React.Component {
             if(key !== 0) {
                 links.push(" | ");
             }
-            const link = page.id === 'home' ? '/' : page.id;
+            let link = '/';
+            if(page.id !== 'home') {
+                link += page.id;
+            }
             links.push(<IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>);
         });
         return (

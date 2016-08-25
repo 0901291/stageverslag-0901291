@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const PageListRow = ({item}) => {
+const AchievementListRow = ({item}) => {
     return (
         <tr>
             <td><Link to={`/${item.content_type}s/${item.id}`}>{item.title}</Link></td>
@@ -10,8 +10,8 @@ const PageListRow = ({item}) => {
     );
 };
 
-PageListRow.propTypes = {
+AchievementListRow.propTypes = {
     item: PropTypes.object.isRequired
 };
 
-export default PageListRow;
+export default AchievementListRow;

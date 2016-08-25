@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import PageListRow from './PageListRow.js';
+import AchievementListRow from './AchievementListRow.js';
 
-const PageList = ({data}) => {
+const AchievementList = ({data}) => {
     return (
         <table>
             <thead>
@@ -12,15 +12,15 @@ const PageList = ({data}) => {
             </thead>
             <tbody>
             {data.map(item =>
-                <PageListRow key={item.id} item={item} />
+                <AchievementListRow key={item.id} item={item} />
             )}
             </tbody>
         </table>
     );
 };
 
-PageList.propTypes = {
+AchievementList.propTypes = {
     data: PropTypes.array.isRequired
 };
 
-export default PageList;
+export default AchievementList;

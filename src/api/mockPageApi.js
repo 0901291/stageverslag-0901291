@@ -10,8 +10,9 @@ const pages = [
     body: "This site gives you a 'behind the scenes' of my internship at Burst...",
     type: "basic",
     overview_type: "",
-    access: "true",
-    show_nav: "true"
+    access: true,
+    show_nav: true,
+    content_type: 'page'
   },
   {
     id: "logs",
@@ -19,8 +20,9 @@ const pages = [
     body: "Read about my days at Burst...",
     type: "overview",
     overview_type: "log",
-    access: "true",
-    show_nav: "true"
+    access: true,
+    show_nav: true,
+    content_type: 'page'
   },
   {
     id: "achievements",
@@ -28,8 +30,9 @@ const pages = [
     body: "Read about my accomplished and yet to accomplish achievements during my internship at Burst...",
     type: "overview",
     overview_type: "achievement",
-    access: "true",
-    show_nav: "true"
+    access: true,
+    show_nav: true,
+    content_type: 'page'
   },
   {
     id: "pages",
@@ -37,8 +40,19 @@ const pages = [
     body: "Manage pages of internshipship site",
     type: "overview",
     overview_type: "page",
-    access: "false",
-    show_nav: "true"
+    access: false,
+    show_nav: true,
+    content_type: 'page'
+  },
+  {
+    id: "notfound",
+    title: "Oops.. Not found",
+    body: "This page either does not exist, or was removed. Please go back to the home page.",
+    type: "basic",
+    overview_type: "",
+    access: false,
+    show_nav: false,
+    content_type: 'page'
   }
 ];
 
@@ -48,7 +62,7 @@ function replaceAll(str, find, replace) {
 
 //This would be performed on the server in a real app. Just stubbing in.
 const generateId = (page) => {
-  return replaceAll(page.title, ' ', '-');
+  return replaceAll(page.title, ' ', '-').toLowerCase();
 };
 
 class PageApi {

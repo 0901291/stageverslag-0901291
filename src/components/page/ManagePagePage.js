@@ -99,8 +99,9 @@ function mapStateToProps(state, ownProps) {
         title: "",
         body: "",
         type: "",
-        overview_type: "",
-        access: true
+        overview_type: "basic",
+        access: true,
+        show_nav: true
     };
 
     const pageId = ownProps.params.id;

@@ -5,44 +5,34 @@ import delay from './delay';
 // All calls return promises.
 const logs = [
   {
-    id: "react-flux-building-applications",
-    title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/logs/react-flux-building-applications",
-    authorId: "cory-house",
-    length: "5:08",
-    category: "JavaScript"
+    id: "log1",
+    content_type: 'log',
+    title: "Log bla 1",
+    body: 'Log bla bla'
   },
   {
-    id: "clean-code",
-    title: "Clean Code: Writing Code for Humans",
-    watchHref: "http://www.pluralsight.com/logs/writing-clean-code-humans",
-    authorId: "cory-house",
-    length: "3:10",
-    category: "Software Practices"
+    id: "log2",
+    content_type: 'log',
+    title: "Log bla 2",
+    body: 'Log bla bla'
   },
   {
-    id: "architecture",
-    title: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/logs/architecting-applications-dotnet",
-    authorId: "cory-house",
-    length: "2:52",
-    category: "Software Architecture"
+    id: "log3",
+    content_type: 'log',
+    title: "Log bla 3",
+    body: 'Log bla bla'
   },
   {
-    id: "career-reboot-for-developer-mind",
-    title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/logs/career-reboot-for-developer-mind",
-    authorId: "cory-house",
-    length: "2:30",
-    category: "Career"
+    id: "log4",
+    content_type: 'log',
+    title: "Log bla 4",
+    body: 'Log bla bla'
   },
   {
-    id: "web-components-shadow-dom",
-    title: "Web Component Fundamentals",
-    watchHref: "http://www.pluralsight.com/logs/web-components-shadow-dom",
-    authorId: "cory-house",
-    length: "5:10",
-    category: "HTML5"
+    id: "log5",
+    content_type: 'log',
+    title: "Log bla 5",
+    body: 'Log bla bla'
   }
 ];
 

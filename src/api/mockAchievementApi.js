@@ -5,44 +5,34 @@ import delay from './delay';
 // All calls return promises.
 const achievements = [
   {
-    id: "react-flux-building-applications",
-    title: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/achievements/react-flux-building-applications",
-    authorId: "cory-house",
-    length: "5:08",
-    category: "JavaScript"
+    id: "achievement1",
+    content_type: 'achievement',
+    title: "Achievement bla 1",
+    body: 'Achievement bla bla'
   },
   {
-    id: "clean-code",
-    title: "Clean Code: Writing Code for Humans",
-    watchHref: "http://www.pluralsight.com/achievements/writing-clean-code-humans",
-    authorId: "cory-house",
-    length: "3:10",
-    category: "Software Practices"
+    id: "achievement2",
+    content_type: 'achievement',
+    title: "Achievement bla 2",
+    body: 'Achievement bla bla'
   },
   {
-    id: "architecture",
-    title: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/achievements/architecting-applications-dotnet",
-    authorId: "cory-house",
-    length: "2:52",
-    category: "Software Architecture"
+    id: "achievement3",
+    content_type: 'achievement',
+    title: "Achievement bla 3",
+    body: 'Achievement bla bla'
   },
   {
-    id: "career-reboot-for-developer-mind",
-    title: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/achievements/career-reboot-for-developer-mind",
-    authorId: "cory-house",
-    length: "2:30",
-    category: "Career"
+    id: "achievement4",
+    content_type: 'achievement',
+    title: "Achievement bla 4",
+    body: 'Achievement bla bla'
   },
   {
-    id: "web-components-shadow-dom",
-    title: "Web Component Fundamentals",
-    watchHref: "http://www.pluralsight.com/achievements/web-components-shadow-dom",
-    authorId: "cory-house",
-    length: "5:10",
-    category: "HTML5"
+    id: "achievement5",
+    content_type: 'achievement',
+    title: "Achievement bla 5",
+    body: 'Achievement bla bla'
   }
 ];
 
