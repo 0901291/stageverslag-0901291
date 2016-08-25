@@ -71,7 +71,7 @@ class LogApi {
           //The server would generate ids and watchHref's for new logs in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
           log.id = generateId(log);
-          log.watchHref = `http://www.pluralsight.com/logs/${log.id}`;
+          log.content_type = 'log';
           logs.push(log);
         }
 

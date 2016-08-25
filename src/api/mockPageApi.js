@@ -91,6 +91,7 @@ class PageApi {
           //The server would generate ids and watchHref's for new pages in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
           page.id = generateId(page);
+          page.content_type = 'page';
           pages.push(page);
         }
 

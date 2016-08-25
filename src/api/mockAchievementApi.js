@@ -71,7 +71,7 @@ class AchievementApi {
           //The server would generate ids and watchHref's for new achievements in a real app.
           //Cloning so copy returned is passed by value rather than by reference.
           achievement.id = generateId(achievement);
-          achievement.watchHref = `http://www.pluralsight.com/achievements/${achievement.id}`;
+          achievement.content_type = 'achievement';
           achievements.push(achievement);
         }
 

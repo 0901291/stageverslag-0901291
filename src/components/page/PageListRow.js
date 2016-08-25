@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 const PageListRow = ({item}) => {
     return (
         <tr>
-            <td><Link to={`/${item.content_type}s/${item.id}`}>{item.title}</Link></td>
+            <td><Link to={`/${item.id}`}>{item.title}</Link></td>
             <td>{item.body}</td>
         </tr>
     );

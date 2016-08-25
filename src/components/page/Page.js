@@ -63,7 +63,7 @@ function mapStateToProps(state, ownProps) {
         show_nav: true
     };
 
-    const pageId = ownProps.params.page || ownProps.route.page;
+    const pageId = ownProps.params.id || ownProps.route.page;
 
     if(pageId && state.pages.length > 0) {
         page = getPageById(state.pages, pageId) || page;

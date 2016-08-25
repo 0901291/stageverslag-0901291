@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options, wrapperClass = []}) => {
     wrapperClass.push('form-group');
-    console.log(wrapperClass);
+
     return (
       <div className={wrapperClass.join(" ")}>
           <label htmlFor={name}>{label}</label>
