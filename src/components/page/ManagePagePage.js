@@ -13,7 +13,10 @@ class ManagePagePage extends React.Component {
             page: Object.assign({}, props.page),
             errors: {},
             saving: false,
-            appIsMounted: false
+            appIsMounted: false,
+            pageTypes: [],
+            overviewTypes: [],
+            editing: props.editing || false
         };
 
         this.savePage = this.savePage.bind(this);
@@ -29,7 +32,7 @@ class ManagePagePage extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.page.id != nextProps.page.id) {
             // Necessary to populate form when existing page is loaded directly.
-            this.setState({page: Object.assign({}, nextProps.page)});
+            this.setState({page: Object.assign({}, nextProps.page), editing: true});
         }
     }
 
@@ -40,21 +43,21 @@ class ManagePagePage extends React.Component {
         return this.setState({page});
     }
 
-    savePage(event) {
+    savePage(event, keepEditing = false) {
         event.preventDefault();
         this.setState({saving: true});
         this.props.actions.savePage(this.state.page)
-            .then(() => this.redirect())
+            .then(() => this.redirect(keepEditing))
             .catch(error => {
                 toastr.error(error);
                 this.setState({saving: false});
             });
     }
 
-    redirect() {
+    redirect(keepEditing = false) {
         this.setState({saving: false});
         toastr.success('Page saved');
-        this.context.router.push('/pages');
+        this.context.router.push(keepEditing ? `/pages/${this.state.page.id}/edit` : `/${this.state.page.id}`);
     }
 
     render() {
@@ -67,6 +70,8 @@ class ManagePagePage extends React.Component {
                     page={this.state.page}
                     errors={this.state.errors}
                     saving={this.state.saving}
+                    pageTypes={this.props.pageTypes}
+                    overviewTypes={this.props.overviewTypes}
                 />
             </div>
         );
@@ -83,8 +88,8 @@ ManagePagePage.contextTypes = {
 };
 
 function getPageById(pages, id) {
-    const page = pages.filter(page => page.id == id);
-    if (page) return page[0]; //since filter returns an array, have to grab the first.
+    const page = pages.find(page => page.id === id);
+    if (page) return page; //since filter returns an array, have to grab the first.
     return null;
 }
 
@@ -95,17 +100,48 @@ function mapStateToProps(state, ownProps) {
         body: "",
         type: "",
         overview_type: "",
-        access: ""
+        access: true
     };
 
     const pageId = ownProps.params.id;
 
-    if (pageId && state.pages.length > 0) {
+    const editing = pageId && state.pages.length > 0;
+
+    if (editing) {
         page = getPageById(state.pages, pageId);
     }
 
+    const pageTypes = [
+      {
+          value: "overview",
+          text: "Overview page"
+      },
+      {
+          value: "basic",
+          text: "Basic page"
+      }
+    ];
+
+    const overviewTypes = [
+        {
+            value: "achievement",
+            text: "Achievements"
+        },
+        {
+            value: "log",
+            text: "Logs"
+        },
+        {
+            value: "page",
+            text: "Pages"
+        }
+    ];
+
     return {
-        page
+        page,
+        pageTypes,
+        overviewTypes,
+        editing
     };
 }
 

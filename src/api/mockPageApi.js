@@ -10,7 +10,8 @@ const pages = [
     body: "This site gives you a 'behind the scenes' of my internship at Burst...",
     type: "basic",
     overview_type: "",
-    access: "true"
+    access: "true",
+    show_nav: "true"
   },
   {
     id: "logs",
@@ -18,7 +19,8 @@ const pages = [
     body: "Read about my days at Burst...",
     type: "overview",
     overview_type: "log",
-    access: "true"
+    access: "true",
+    show_nav: "true"
   },
   {
     id: "achievements",
@@ -26,7 +28,8 @@ const pages = [
     body: "Read about my accomplished and yet to accomplish achievements during my internship at Burst...",
     type: "overview",
     overview_type: "achievement",
-    access: "true"
+    access: "true",
+    show_nav: "true"
   },
   {
     id: "pages",
@@ -34,7 +37,8 @@ const pages = [
     body: "Manage pages of internshipship site",
     type: "overview",
     overview_type: "page",
-    access: "false"
+    access: "false",
+    show_nav: "true"
   }
 ];
 

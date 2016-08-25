@@ -5,26 +5,21 @@ import LoadingDots from './LoadingDots';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { appIsMounted: false };
-    }
-
-    componentDidMount() {
-        requestAnimationFrame(() => {
-            this.setState({ appIsMounted: true });
-        });
     }
 
     render() {
+        const links = [];
+
+        this.props.pages.filter(page => page.show_nav).forEach((page, key) => {
+            if(key !== 0) {
+                links.push(" | ");
+            }
+            const link = page.id === 'home' ? '/' : page.id;
+            links.push(<IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>);
+        });
         return (
           <nav>
-              <IndexLink to="/" activeClassName="active">Home</IndexLink>
-              {" | "}
-              <IndexLink to="/logs" activeClassName="active">Logs</IndexLink>
-              {" | "}
-              <IndexLink to="/achievements" activeClassName="active">Achievements</IndexLink>
-              {" | "}
-              <IndexLink to="/pages" activeClassName="active">Pages</IndexLink>
-              {/*{this.state.appIsMounted && this.props.loading && <LoadingDots interval={100} dots={20} />}*/}
+              {links}
           </nav>
         );
     }
@@ -32,7 +27,8 @@ class Header extends React.Component {
 };
 
 Header.propTypes = {
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    pages: PropTypes.array.isRequired
 };
 
 export default Header;

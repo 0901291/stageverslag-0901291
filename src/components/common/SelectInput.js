@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react';
 
-const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
+const SelectInput = ({name, label, onChange, defaultOption, value, error, options, wrapperClass = []}) => {
+  wrapperClass.push('form-group');
   return (
-    <div className="form-group">
+    <div className={wrapperClass.join(" ")}>
       <label htmlFor={name}>{label}</label>
       <div className="field">
         {/* Note, value is set here rather than on the option - docs: https://facebook.github.io/react/docs/forms.html */}

@@ -9,6 +9,7 @@ class App extends React.Component {
             <div className="container-fluid">
                 <Header
                     loading={this.props.loading}
+                    pages={this.props.pages}
                 />
                 {this.props.children}
             </div>
@@ -23,7 +24,8 @@ App.propTypes = {
 
 function mapStateToProps(state, ownProps) {
     return {
-        loading: state.numAjaxCallsInProgress > 0
+        loading: state.numAjaxCallsInProgress > 0,
+        pages: state.pages
     };
 }
 

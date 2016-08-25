@@ -1,20 +1,19 @@
 import React, {PropTypes} from 'react';
 
-const TextInput = ({name, label, onChange, placeholder, value, error}) => {
-  let wrapperClass = 'form-group';
+const TextInput = ({name, label, onChange, placeholder, value, error, type = "text", wrapperClass = []}) => {
+  wrapperClass.push('form-group');
   if (error && error.length > 0) {
-    wrapperClass += ' has-error';
+    wrapperClass.push('has-error');
   }
-
   return (
-    <div className={wrapperClass}>
+    <div className={wrapperClass.join(" ")}>
       <label htmlFor={name}>{label}</label>
       <div className="field">
         <input
-          type="text"
+          type={type}
           name={name}
           id={name}
-          className="form-control"
+          className={type !== 'checkbox' ? 'form-control' : ''}
           placeholder={placeholder}
           value={value}
           onChange={onChange}/>
@@ -29,7 +28,6 @@ TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
-  value: PropTypes.string,
   error: PropTypes.string
 };
 

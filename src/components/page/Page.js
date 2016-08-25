@@ -15,10 +15,10 @@ class Page extends React.Component {
     }
 
     render() {
-        const {page} = this.props;
+        const page = this.props.page;
         return (
             <div>
-                <h1>Page</h1>
+                <h1>{page.title}</h1>
             </div>
         );
     }
@@ -28,9 +28,19 @@ Page.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
+function getPageById(pages, id) {
+    const page = pages.find(page => page.id === id);
+    if (page) return page; //since filter returns an array, have to grab the first.
+    return null;
+}
+
 function mapStateToProps(state, ownProps) {
+    const pageId = ownProps.params.page || ownProps.route.page;
+
+    let page = pageId && state.pages.length > 0 ? getPageById(state.pages, pageId) : {};
+
     return {
-       pages: state.pages
+        page
     };
 }
 

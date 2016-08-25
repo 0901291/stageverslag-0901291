@@ -8,7 +8,7 @@ import Page from './components/page/Page'; // Page detail
 
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={Page} />
+        <IndexRoute page="home" component={Page} />
         <Route path="achievements/add" component={ManageAchievementPage} />
         <Route path="achievements/:id/edit" component={ManageAchievementPage} />
         <Route path="achievements/:id" component={AchievementPage} />
