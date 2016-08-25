@@ -5,7 +5,6 @@ import App from './components/App';
 // import AchievementPage from './components/achievement/AchievementPage'; // Achievement detail
 import ManagePagePage from './components/page/ManagePagePage'; // Add/edit page
 import Page from './components/page/Page'; // Page detail
-import NotFound from './components/common/NotFound';
 
 export default (
     <Route path="/" component={App}>
