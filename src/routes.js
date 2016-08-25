@@ -16,8 +16,8 @@ export default (
         <Route path="pages/add" component={ManagePagePage} />
         <Route path="pages/:id/edit" component={ManagePagePage} />
         <Route path=":id" component={Page} />
-        <Route path="/pages/:id" component={Page} />
         <Route path=":id/edit" component={ManagePagePage} />
+        <Route path="/pages/:id" component={Page} />
         <Route path="notfound" page="notfound" component={Page} />
     </Route>
 );

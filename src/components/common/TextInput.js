@@ -5,7 +5,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error, type = "te
     if (error && error.length > 0) {
         wrapperClass.push('has-error');
     }
-    value = value || checked;
+    const val = typeof checked != 'undefined' ? {checked} : {value};
     return (
       <div className={wrapperClass.join(" ")}>
           <label htmlFor={name}>{label}</label>
@@ -16,8 +16,7 @@ const TextInput = ({name, label, onChange, placeholder, value, error, type = "te
                 id={name}
                 className={type !== 'checkbox' ? 'form-control' : ''}
                 placeholder={placeholder}
-                value={value}
-                checked={value}
+                {...val}
                 onChange={onChange}/>
               {error && <div className="alert alert-danger">{error}</div>}
           </div>

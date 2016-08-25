@@ -4,13 +4,14 @@ import {bindActionCreators} from 'redux';
 import * as pageActions from '../../actions/pageActions';
 import PageForm from './PageForm';
 import toastr from 'toastr';
+import pageModel from './pageModel';
 
 class ManagePagePage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
         this.state = {
-            page: Object.assign({}, props.page),
+            page: Object.assign({}, pageModel, props.page),
             errors: {},
             saving: false,
             appIsMounted: false,
@@ -39,7 +40,7 @@ class ManagePagePage extends React.Component {
     updatePageState(event) {
         const field = event.target.name;
         let page = this.state.page;
-        page[field] = event.target.value;
+        page[field] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         return this.setState({page});
     }
 
@@ -94,15 +95,7 @@ function getPageById(pages, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-    let page = {
-        id: "",
-        title: "",
-        body: "",
-        type: "",
-        overview_type: "basic",
-        access: true,
-        show_nav: true
-    };
+    let page = pageModel;
 
     const pageId = ownProps.params.id;
 

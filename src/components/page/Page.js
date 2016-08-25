@@ -6,10 +6,14 @@ import {Link} from 'react-router';
 import PageList from './PageList';
 import AchievementList from '../achievement/AchievementList';
 import LogList from '../achievement/AchievementList';
+import pageModel from './pageModel';
 
 class Page extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            page: Object.assign({}, pageModel, props.page)
+        }
     }
 
     render() {
@@ -53,15 +57,7 @@ function getPageById(pages, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-    let page = {
-        id: "",
-        title: "",
-        body: "",
-        type: "",
-        overview_type: "basic",
-        access: true,
-        show_nav: true
-    };
+    let page = pageModel;
 
     const pageId = ownProps.params.id || ownProps.route.page;
 
