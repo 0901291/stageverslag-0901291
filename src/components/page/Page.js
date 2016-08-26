@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 import PageList from './PageList';
 import AchievementList from '../achievement/AchievementList';
 import LogList from '../achievement/AchievementList';
-import pageModel from './pageModel';
+import pageModel from '../../models/pageModel';
 
 class Page extends React.Component {
     constructor(props, context) {
@@ -20,7 +20,7 @@ class Page extends React.Component {
         const page = this.props.page;
         const data = this.props.data;
         let OverviewPage;
-        switch(page.overview_type) {
+        switch (page.overview_type) {
             case 'achievement':
                 OverviewPage = AchievementList;
                 break;
@@ -32,13 +32,16 @@ class Page extends React.Component {
                 OverviewPage = PageList;
         }
         return (
-            <div>
-                {page.type === 'overview' && <Link to={`/${page.overview_type}s/add`} className="btn btn-primary btn-lg">Add new {page.overview_type}</Link>}
-                <Link to={`/pages/${page.id}/edit`} className={`btn btn-lg ${page.type !== 'overview' ? ' btn-primary' : ''}`}>Edit page</Link>
-                <h1>{page.title}</h1>
-                <p>{page.body}</p>
-                {page.type === 'overview' && <OverviewPage data={data} />}
-            </div>
+          <div>
+              {page.type === 'overview' &&
+              <Link to={`/${page.overview_type}s/add`} className="btn btn-primary btn-lg">Add
+                  new {page.overview_type}</Link>}
+              <Link to={`/pages/${page.id}/edit`}
+                    className={`btn btn-lg ${page.type !== 'overview' ? ' btn-primary' : ''}`}>Edit page</Link>
+              <h1>{page.title}</h1>
+              <p>{page.body}</p>
+              {page.type === 'overview' && <OverviewPage data={data}/>}
+          </div>
         );
     }
 }
@@ -62,7 +65,7 @@ function mapStateToProps(state, ownProps) {
 
     const pageId = ownProps.params.id || ownProps.route.page;
 
-    if(pageId && state.pages.length > 0) {
+    if (pageId && state.pages.length > 0) {
         page = getPageById(state.pages, pageId) || page;
     }
 

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as pageActions from '../../actions/pageActions';
 import PageForm from './PageForm';
 import toastr from 'toastr';
-import pageModel from './pageModel';
+import pageModel from '../../models/pageModel';
 
 class ManagePagePage extends React.Component {
     constructor(props, context) {
@@ -21,14 +21,14 @@ class ManagePagePage extends React.Component {
             editing: props.editing || false
         };
 
-        this.savePage = this.savePage.bind(this);
+        this.savePage        = this.savePage.bind(this);
         this.updatePageState = this.updatePageState.bind(this);
-        this.deletePage = this.deletePage.bind(this);
+        this.deletePage      = this.deletePage.bind(this);
     }
 
     componentDidMount() {
         requestAnimationFrame(() => {
-            this.setState({ appIsMounted: true });
+            this.setState({appIsMounted: true});
         });
     }
 
@@ -41,7 +41,7 @@ class ManagePagePage extends React.Component {
 
     updatePageState(event) {
         const field = event.target.name;
-        let page = this.state.page;
+        let page    = this.state.page;
         page[field] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         return this.setState({page});
     }
@@ -51,27 +51,27 @@ class ManagePagePage extends React.Component {
         this.setState({saving: true});
         toastr.clear();
         this.props.actions.savePage(this.state.page)
-            .then(() => this.redirect(keepEditing))
-            .catch(error => {
-                toastr.error(error);
-                this.setState({saving: false});
-            });
+          .then(() => this.redirect(keepEditing))
+          .catch(error => {
+              toastr.error(error);
+              this.setState({saving: false});
+          });
     }
 
     deletePage(event = false) {
-        if(!event) {
+        if (!event) {
             this.setState({deleteState: 0});
         } else {
-            if(event !== true) {
+            if (event !== true) {
                 event.preventDefault();
             }
             this.setState({deleteState: ++this.state.deleteState});
         }
-        if(this.state.deleteState === 1) {
+        if (this.state.deleteState === 1) {
             toastr.options.timeOut = 0;
             toastr.warning('Sure you want to delete this page? Click again to confirm.');
             toastr.options.timeOut = 5000;
-        } else if(this.state.deleteState === 2) {
+        } else if (this.state.deleteState === 2) {
             const page = this.state.page;
             toastr.clear();
             this.props.actions.deletePage(page)
@@ -98,21 +98,21 @@ class ManagePagePage extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Manage Page</h1>
-                <PageForm
-                    onChange={this.updatePageState}
-                    onSave={this.savePage}
-                    onDelete={this.deletePage}
-                    page={this.state.page}
-                    errors={this.state.errors}
-                    saving={this.state.saving}
-                    deleteState={this.state.deleteState}
-                    pageTypes={this.props.pageTypes}
-                    overviewTypes={this.props.overviewTypes}
-                    editing={this.state.editing}
-                />
-            </div>
+          <div>
+              <h1>Manage Page</h1>
+              <PageForm
+                onChange={this.updatePageState}
+                onSave={this.savePage}
+                onDelete={this.deletePage}
+                page={this.state.page}
+                errors={this.state.errors}
+                saving={this.state.saving}
+                deleteState={this.state.deleteState}
+                pageTypes={this.props.pageTypes}
+                overviewTypes={this.props.overviewTypes}
+                editing={this.state.editing}
+              />
+          </div>
         );
     }
 }
@@ -144,14 +144,14 @@ function mapStateToProps(state, ownProps) {
     }
 
     const pageTypes = [
-      {
-          value: "overview",
-          text: "Overview page"
-      },
-      {
-          value: "basic",
-          text: "Basic page"
-      }
+        {
+            value: "overview",
+            text: "Overview page"
+        },
+        {
+            value: "basic",
+            text: "Basic page"
+        }
     ];
 
     const overviewTypes = [

@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function achievementReducer(state = initialState.achievements, action) {
-    switch(action.type) {
+    switch (action.type) {
         case types.LOAD_ACHIEVEMENTS_SUCCESS:
             return action.achievements;
         case types.CREATE_ACHIEVEMENT_SUCCESS:

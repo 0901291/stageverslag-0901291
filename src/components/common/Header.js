@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import { Link, IndexLink } from 'react-router';
+import {Link, IndexLink} from 'react-router';
 import LoadingDots from './LoadingDots';
 
 class Header extends React.Component {
@@ -11,11 +11,11 @@ class Header extends React.Component {
         const links = [];
 
         this.props.pages.filter(page => page.show_nav).forEach((page, key) => {
-            if(key !== 0) {
+            if (key !== 0) {
                 links.push(" | ");
             }
             let link = '/';
-            if(page.id !== 'home') {
+            if (page.id !== 'home') {
                 link += page.id;
             }
             links.push(<IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>);
@@ -27,7 +27,8 @@ class Header extends React.Component {
         );
     }
 
-};
+}
+;
 
 Header.propTypes = {
     loading: PropTypes.bool.isRequired,

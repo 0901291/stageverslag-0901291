@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 import initialState from './initialState';
 
 export default function logReducer(state = initialState.logs, action) {
-    switch(action.type) {
+    switch (action.type) {
         case types.LOAD_LOGS_SUCCESS:
             return action.logs;
         case types.CREATE_LOG_SUCCESS:

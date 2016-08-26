@@ -4,77 +4,77 @@ import SelectInput from '../common/SelectInput';
 
 const PageForm = ({page, pageTypes, overviewTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0}) => {
     return (
-        <form>
-            <TextInput
-                name="title"
-                label="Title"
-                value={page.title}
-                onChange={onChange}
-                error={errors.title}/>
+      <form>
+          <TextInput
+            name="title"
+            label="Title"
+            value={page.title}
+            onChange={onChange}
+            error={errors.title}/>
 
-            <SelectInput
-              name="type"
-              label="Page Type"
-              value={page.type}
-              defaultOption="Select Page type"
-              options={pageTypes}
-              onChange={onChange}
-              error={errors.type}/>
+          <SelectInput
+            name="type"
+            label="Page Type"
+            value={page.type}
+            defaultOption="Select Page type"
+            options={pageTypes}
+            onChange={onChange}
+            error={errors.type}/>
 
-            <SelectInput
-              name="overview_type"
-              label="Overview Type"
-              value={page.overview_type}
-              defaultOption="Select Overview type"
-              options={overviewTypes}
-              onChange={onChange}
-              wrapperClass={page.type !== 'overview' ? ['hidden'] : []}
-              error={errors.overview_type}/>
+          <SelectInput
+            name="overview_type"
+            label="Overview Type"
+            value={page.overview_type}
+            defaultOption="Select Overview type"
+            options={overviewTypes}
+            onChange={onChange}
+            wrapperClass={page.type !== 'overview' ? ['hidden'] : []}
+            error={errors.overview_type}/>
 
-            <TextInput
-                name="body"
-                label="Body text"
-                value={page.body}
-                onChange={onChange}
-                error={errors.body}/>
+          <TextInput
+            name="body"
+            label="Body text"
+            value={page.body}
+            onChange={onChange}
+            error={errors.body}/>
 
-            <TextInput
-              type="checkbox"
-              name="access"
-              label="Accessible page (uncheck to make page login protected)"
-              checked={page.access}
-              onChange={onChange}
-              error={errors.access}/>
+          <TextInput
+            type="checkbox"
+            name="access"
+            label="Accessible page (uncheck to make page login protected)"
+            checked={page.access}
+            onChange={onChange}
+            error={errors.access}/>
 
-            <TextInput
-              type="checkbox"
-              name="show_nav"
-              label="Show in navigation"
-              checked={page.show_nav}
-              onChange={onChange}
-              error={errors.show_nav}/>
+          <TextInput
+            type="checkbox"
+            name="show_nav"
+            label="Show in navigation"
+            checked={page.show_nav}
+            onChange={onChange}
+            error={errors.show_nav}/>
 
-            <input
-                type="submit"
-                disabled={saving}
-                value={saving ? 'Saving...' : 'Save'}
-                className="btn btn-primary"
-                onClick={onSave}/>
+          <input
+            type="submit"
+            disabled={saving}
+            value={saving ? 'Saving...' : 'Save'}
+            className="btn btn-primary"
+            onClick={onSave}/>
 
-            <input
-              type="submit"
-              disabled={saving}
-              value={saving ? 'Saving...' : 'Save and keep editing'}
-              className="btn"
-              onClick={e => onSave(e, true)}/>
+          <input
+            type="submit"
+            disabled={saving}
+            value={saving ? 'Saving...' : 'Save and keep editing'}
+            className="btn"
+            onClick={e => onSave(e, true)}/>
 
-            {editing && <input
-              type="submit"
-              disabled={deleteState === 2}
-              value={deleteState === 2 ? 'Deleting...' : (deleteState === 1 ? 'Confirm deleting' : 'Delete this page')}
-              className="btn btn-danger"
-              onClick={onDelete}/>}
-        </form>
+          {editing && <input
+            type="submit"
+            disabled={deleteState === 2}
+            value={deleteState === 2 ? 'Deleting...' : (deleteState === 1 ? 'Confirm deleting' : 'Delete this page')}
+            className="btn btn-danger"
+            onClick={onDelete}/>}
+      </form>
     );
 };
 
