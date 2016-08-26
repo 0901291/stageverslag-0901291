@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
-const PageForm = ({page, pageTypes, overviewTypes, onSave, onChange, saving, errors}) => {
+const PageForm = ({page, pageTypes, overviewTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0}) => {
     return (
         <form>
             <TextInput
@@ -67,6 +67,13 @@ const PageForm = ({page, pageTypes, overviewTypes, onSave, onChange, saving, err
               value={saving ? 'Saving...' : 'Save and keep editing'}
               className="btn"
               onClick={e => onSave(e, true)}/>
+
+            {editing && <input
+              type="submit"
+              disabled={deleteState === 2}
+              value={deleteState === 2 ? 'Deleting...' : (deleteState === 1 ? 'Confirm deleting' : 'Delete this page')}
+              className="btn btn-danger"
+              onClick={onDelete}/>}
         </form>
     );
 };
@@ -77,7 +84,10 @@ PageForm.propTypes = {
     overviewTypes: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     saving: PropTypes.bool,
+    editing: PropTypes.bool,
+    deleteState: PropTypes.number,
     errors: PropTypes.object
 };
 

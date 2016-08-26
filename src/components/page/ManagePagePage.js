@@ -14,6 +14,7 @@ class ManagePagePage extends React.Component {
             page: Object.assign({}, pageModel, props.page),
             errors: {},
             saving: false,
+            deleteState: 0,
             appIsMounted: false,
             pageTypes: [],
             overviewTypes: [],
@@ -22,6 +23,7 @@ class ManagePagePage extends React.Component {
 
         this.savePage = this.savePage.bind(this);
         this.updatePageState = this.updatePageState.bind(this);
+        this.deletePage = this.deletePage.bind(this);
     }
 
     componentDidMount() {
@@ -47,6 +49,7 @@ class ManagePagePage extends React.Component {
     savePage(event, keepEditing = false) {
         event.preventDefault();
         this.setState({saving: true});
+        toastr.clear();
         this.props.actions.savePage(this.state.page)
             .then(() => this.redirect(keepEditing))
             .catch(error => {
@@ -55,10 +58,42 @@ class ManagePagePage extends React.Component {
             });
     }
 
+    deletePage(event = false) {
+        if(!event) {
+            this.setState({deleteState: 0});
+        } else {
+            if(event !== true) {
+                event.preventDefault();
+            }
+            this.setState({deleteState: ++this.state.deleteState});
+        }
+        if(this.state.deleteState === 1) {
+            toastr.options.timeOut = 0;
+            toastr.warning('Sure you want to delete this page? Click again to confirm.');
+            toastr.options.timeOut = 5000;
+        } else if(this.state.deleteState === 2) {
+            const page = this.state.page;
+            toastr.clear();
+            this.props.actions.deletePage(page)
+              .then(() => this.redirectAfterDelete(page))
+              .catch(error => {
+                  console.error(error);
+                  toastr.error(error);
+                  this.setState({deleting: false});
+              });
+        }
+    }
+
     redirect(keepEditing = false) {
         this.setState({saving: false});
         toastr.success('Page saved');
         this.context.router.push(keepEditing ? `/pages/${this.state.page.id}/edit` : `/${this.state.page.id}`);
+    }
+
+    redirectAfterDelete(page) {
+        this.setState({deleting: false});
+        toastr.success(`Page <strong>${page.title}</strong> deleted`);
+        this.context.router.push(`/pages`);
     }
 
     render() {
@@ -68,11 +103,14 @@ class ManagePagePage extends React.Component {
                 <PageForm
                     onChange={this.updatePageState}
                     onSave={this.savePage}
+                    onDelete={this.deletePage}
                     page={this.state.page}
                     errors={this.state.errors}
                     saving={this.state.saving}
+                    deleteState={this.state.deleteState}
                     pageTypes={this.props.pageTypes}
                     overviewTypes={this.props.overviewTypes}
+                    editing={this.state.editing}
                 />
             </div>
         );
@@ -91,7 +129,7 @@ ManagePagePage.contextTypes = {
 function getPageById(pages, id) {
     const page = pages.find(page => page.id === id);
     if (page) return page; //since filter returns an array, have to grab the first.
-    return null;
+    return pageModel;
 }
 
 function mapStateToProps(state, ownProps) {

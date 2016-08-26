@@ -15,6 +15,10 @@ export default function pageReducer(state = initialState.pages, action) {
                 ...state.filter(page => page.id !== action.page.id),
                 Object.assign({}, action.page)
             ];
+        case types.DELETE_PAGE_SUCCESS:
+            return [
+              ...state.filter(page => page.id !== action.page.id)
+            ]
         default:
             return state;
     }

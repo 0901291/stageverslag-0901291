@@ -23,6 +23,13 @@ export function updatePageSuccess(page) {
     };
 }
 
+export function deletePageSuccess(page) {
+    return {
+        type: types.DELETE_PAGE_SUCCESS,
+        page
+    };
+}
+
 export function loadPages() {
     return dispatch => {
         dispatch(beginAjaxCall());
@@ -37,12 +44,26 @@ export function loadPages() {
 }
 
 export function savePage(page) {
-    const c = Object.assign({}, page);
+    const p = Object.assign({}, page);
     return dispatch => {
         dispatch(beginAjaxCall());
         return pageApi.savePage(page)
           .then(page => {
-              c.id ? dispatch(updatePageSuccess(page)) : dispatch(createPageSuccess(page));
+              p.id ? dispatch(updatePageSuccess(page)) : dispatch(createPageSuccess(page));
+          })
+          .catch(error => {
+              dispatch(ajaxCallError(error));
+              throw(error);
+          });
+    };
+}
+
+export function deletePage(page) {
+    return dispatch => {
+        dispatch(beginAjaxCall());
+        return pageApi.deletePage(page)
+          .then(() => {
+              dispatch(deletePageSuccess(page));
           })
           .catch(error => {
               dispatch(ajaxCallError(error));
