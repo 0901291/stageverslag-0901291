@@ -34,6 +34,7 @@ class Page extends React.Component {
         return (
             <div>
                 {page.type === 'overview' && <Link to={`/${page.overview_type}s/add`} className="btn btn-primary btn-lg">Add new {page.overview_type}</Link>}
+                <Link to={`/pages/${page.id}/edit`} className="btn btn-lg">Edit page</Link>
                 <h1>{page.title}</h1>
                 <p>{page.body}</p>
                 {page.type === 'overview' && <OverviewPage data={data} />}
