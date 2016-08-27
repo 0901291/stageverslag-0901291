@@ -15,6 +15,10 @@ export default function achievementReducer(state = initialState.achievements, ac
                 ...state.filter(achievement => achievement.id !== action.achievement.id),
                 Object.assign({}, action.achievement)
             ];
+        case types.DELETE_ACHIEVEMENT_SUCCESS:
+            return [
+                ...state.filter(achievement => achievement.id !== action.achievement.id)
+            ]
         default:
             return state;
     }

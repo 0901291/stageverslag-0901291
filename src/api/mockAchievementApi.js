@@ -1,33 +1,48 @@
 const achievements = [
     {
-        id: "achievement1",
+        id: "klantwens",
         content_type: 'achievement',
-        title: "Achievement bla 1",
-        body: 'Achievement bla bla'
+        title: "Klantwens",
+        body: 'De echte wens van de klant in kaart kunt brengen, de \"vraag achter de vraag\".',
+        type: 'Analyseren',
+        status: 'done',
+        references: []
     },
     {
-        id: "achievement2",
+        id: "reflecteren",
         content_type: 'achievement',
-        title: "Achievement bla 2",
-        body: 'Achievement bla bla'
+        title: "Reflecteren",
+        body: 'Kunt reflecteren op eigen handelen en invloed hebt op het ontwikkelproces en daar conclusies uit kunt trekken.',
+        type: 'Adviseren',
+        status: 'in_progress',
+        references: []
     },
     {
-        id: "achievement3",
+        id: "testplan",
         content_type: 'achievement',
-        title: "Achievement bla 3",
-        body: 'Achievement bla bla'
+        title: "Testplan",
+        body: 'Een testplan kunt opstellen.',
+        type: 'Ontwerpen',
+        status: 'to_do',
+        references: []
     },
     {
-        id: "achievement4",
+        id: "usability-test",
         content_type: 'achievement',
-        title: "Achievement bla 4",
-        body: 'Achievement bla bla'
+        title: "Usability test",
+        body: 'Usability tests kunt opzetten en uitvoeren.',
+        type: 'Realiseren',
+        status: 'to_do',
+        references: []
     },
     {
-        id: "achievement5",
+        id: "versiebeheer",
         content_type: 'achievement',
-        title: "Achievement bla 5",
-        body: 'Achievement bla bla'
+        title: "Versiebeheer",
+        body: 'Versiebeheer kunt toepassen in het ontwikkeltraject.',
+        type: 'Implementeren',
+        status: 'done',
+        references: []
     }
 ];
 
@@ -36,7 +51,7 @@ function replaceAll(str, find, replace) {
 }
 
 const generateId = (achievement) => {
-    return replaceAll(achievement.title, ' ', '-');
+    return replaceAll(achievement.title, ' ', '-').toLowerCase();
 };
 
 class AchievementApi {
@@ -66,13 +81,13 @@ class AchievementApi {
         });
     }
 
-    static deleteAchievement(achievementId) {
+    static deleteAchievement(achievement) {
         return new Promise((resolve, reject) => {
-            const indexOfAchievementToDelete = achievements.findIndex(achievement => {
-                achievement.achievementId == achievementId;
+            const indexOfAchievementToDelete = achievements.findIndex(a => {
+                a.id == achievement.id;
             });
             achievements.splice(indexOfAchievementToDelete, 1);
-            resolve();
+            resolve(Object.assign({}, achievement));
         });
     }
 }

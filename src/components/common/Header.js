@@ -21,9 +21,11 @@ class Header extends React.Component {
             links.push(<IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>);
         });
         return (
-          <nav>
-              {links}
-          </nav>
+          <div>
+              <nav>
+                  {links}
+              </nav>
+          </div>
         );
     }
 

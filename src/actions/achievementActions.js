@@ -23,6 +23,13 @@ export function updateAchievementSuccess(achievement) {
     };
 }
 
+export function deleteAchievementSuccess(achievement) {
+    return {
+        type: types.DELETE_ACHIEVEMENT_SUCCESS,
+        achievement
+    };
+}
+
 export function loadAchievements() {
     return dispatch => {
         dispatch(beginAjaxCall());
@@ -43,6 +50,20 @@ export function saveAchievement(achievement) {
         return achievementApi.saveAchievement(achievement)
           .then(achievement => {
               c.id ? dispatch(updateAchievementSuccess(achievement)) : dispatch(createAchievementSuccess(achievement));
+          })
+          .catch(error => {
+              dispatch(ajaxCallError(error));
+              throw(error);
+          });
+    };
+}
+
+export function deleteAchievement(achievement) {
+    return dispatch => {
+        dispatch(beginAjaxCall());
+        return achievementApi.deleteAchievement(achievement)
+          .then(() => {
+              dispatch(deleteAchievementSuccess(achievement));
           })
           .catch(error => {
               dispatch(ajaxCallError(error));
