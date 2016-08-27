@@ -64,12 +64,12 @@ const achievements = [
     }
 ];
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
+function replaceAll(str) {
+    return str.replace(' ', '').replace(/\W/g, '');
 }
 
 const generateId = (achievement) => {
-    return replaceAll(achievement.title, ' ', '-').toLowerCase();
+    return replaceAll(achievement.title).toLowerCase();
 };
 
 class AchievementApi {

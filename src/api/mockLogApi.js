@@ -31,12 +31,12 @@ const logs = [
     }
 ];
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
+function replaceAll(str) {
+    return str.replace(' ', '').replace(/\W/g, '');
 }
 
 const generateId = (log) => {
-    return replaceAll(log.title, ' ', '-').toLowerCase();
+    return replaceAll(log.title).toLowerCase();
 };
 
 class LogApi {

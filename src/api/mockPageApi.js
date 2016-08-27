@@ -51,12 +51,12 @@ const pages = [
     }
 ];
 
-function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(find, 'g'), replace);
+function replaceAll(str) {
+    return str.replace(' ', '').replace(/\W/g, '');
 }
 
 const generateId = (page) => {
-    return replaceAll(page.title, ' ', '-').toLowerCase();
+    return replaceAll(page.title).toLowerCase();
 };
 
 class PageApi {
