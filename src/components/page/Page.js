@@ -16,7 +16,7 @@ import pageModel from '../../models/pageModel';
  */
 const Page = ({page, data}) => {
     let OverviewPage;
-    switch (page.overview_type) {
+    switch (page.overview_type) { // Generically switch on overview type to allow a view mode per overview type
         case 'achievement':
             OverviewPage = AchievementList;
             break;
