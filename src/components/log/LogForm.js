@@ -57,9 +57,6 @@ const LogForm = ({log, onSave, onDelete, onChange, saving = false, editing = fal
 
 LogForm.propTypes = {
     log: PropTypes.object.isRequired,
-    logTypes: PropTypes.array.isRequired,
-    referenceOptions: PropTypes.array.isRequired,
-    statusTypes: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired,
