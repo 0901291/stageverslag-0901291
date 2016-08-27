@@ -17,9 +17,11 @@ export default function pageReducer(state = initialState.pages, action) {
                 Object.assign({}, action.page) // Add copy of new page to state
             ];
         case types.UPDATE_PAGE_SUCCESS:
+            const indexToUpdate = state.findIndex(page => page.id === action.page.id);
             return [
-                ...state.filter(page => page.id !== action.page.id),
-                Object.assign({}, action.page) // Filter out existing page and add copy of new page to state
+                ...state.slice(0, indexToUpdate),
+                Object.assign({}, action.page),
+                ...state.slice(indexToUpdate + 1) // Replace edited page
             ];
         case types.DELETE_PAGE_SUCCESS:
             return [
