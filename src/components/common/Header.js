@@ -13,7 +13,7 @@ const Header = ({pages}) => {
         if (page.id !== 'home') { // Home link should be just a /, not /home
             link += page.id;
         }
-        return (key !== 0 ? ' | ' : '') + <IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>;
+        return [(key !== 0 ? ' | ' : ''), <IndexLink key={page.id} to={link} activeClassName="active">{page.title}</IndexLink>];
     });
     return (
       <div>
