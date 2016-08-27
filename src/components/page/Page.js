@@ -5,7 +5,7 @@ import * as pageActions from '../../actions/pageActions';
 import {Link} from 'react-router';
 import PageList from './PageList';
 import AchievementList from '../achievement/AchievementList';
-import LogList from '../achievement/AchievementList';
+import LogList from '../log/LogList';
 import pageModel from '../../models/pageModel';
 
 class Page extends React.Component {

@@ -23,6 +23,13 @@ export function updateLogSuccess(log) {
     };
 }
 
+export function deleteLogSuccess(log) {
+    return {
+        type: types.DELETE_LOG_SUCCESS,
+        log
+    };
+}
+
 export function loadLogs() {
     return dispatch => {
         dispatch(beginAjaxCall());
@@ -43,6 +50,20 @@ export function saveLog(log) {
         return logApi.saveLog(log)
           .then(log => {
               c.id ? dispatch(updateLogSuccess(log)) : dispatch(createLogSuccess(log));
+          })
+          .catch(error => {
+              dispatch(ajaxCallError(error));
+              throw(error);
+          });
+    };
+}
+
+export function deleteLog(log) {
+    return dispatch => {
+        dispatch(beginAjaxCall());
+        return logApi.deleteLog(log)
+          .then(() => {
+              dispatch(deleteLogSuccess(log));
           })
           .catch(error => {
               dispatch(ajaxCallError(error));

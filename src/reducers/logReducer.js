@@ -15,6 +15,10 @@ export default function logReducer(state = initialState.logs, action) {
                 ...state.filter(log => log.id !== action.log.id),
                 Object.assign({}, action.log)
             ];
+        case types.DELETE_LOG_SUCCESS:
+            return [
+                ...state.filter(log => log.id !== action.log.id)
+            ]
         default:
             return state;
     }

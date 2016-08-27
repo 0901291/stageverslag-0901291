@@ -36,7 +36,7 @@ function replaceAll(str, find, replace) {
 }
 
 const generateId = (log) => {
-    return replaceAll(log.title, ' ', '-');
+    return replaceAll(log.title, ' ', '-').toLowerCase();
 };
 
 class LogApi {
@@ -66,13 +66,13 @@ class LogApi {
         });
     }
 
-    static deleteLog(logId) {
+    static deleteLog(log) {
         return new Promise((resolve, reject) => {
-            const indexOfLogToDelete = logs.findIndex(log => {
-                log.logId == logId;
+            const indexOfLogToDelete = logs.findIndex(l => {
+                l.id == log.id;
             });
             logs.splice(indexOfLogToDelete, 1);
-            resolve();
+            resolve(Object.assign({}, log));
         });
     }
 }

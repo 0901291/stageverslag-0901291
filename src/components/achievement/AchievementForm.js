@@ -4,6 +4,7 @@ import SelectInput from '../common/SelectInput';
 import AdvancedSelect from 'react-select';
 
 const AchievementForm = ({achievement, achievementTypes, statusTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0, referenceOptions}) => {
+    console.log(achievement.references);
     return (
       <form>
           <TextInput

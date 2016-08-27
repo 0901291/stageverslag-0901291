@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
-import AchievementListRow from './AchievementListRow.js';
+import LogListRow from './LogListRow.js';
 
-const AchievementList = ({data}) => {
+const LogList = ({data}) => {
     return (
       <table>
           <thead>
@@ -11,16 +11,16 @@ const AchievementList = ({data}) => {
           </tr>
           </thead>
           <tbody>
-          {data.map(item =>
-            <AchievementListRow key={item.id} item={item}/>
+          {data.map(log =>
+            <LogListRow key={log.id} log={log}/>
           )}
           </tbody>
       </table>
     );
 };
 
-AchievementList.propTypes = {
+LogList.propTypes = {
     data: PropTypes.array.isRequired
 };
 
-export default AchievementList;
+export default LogList;

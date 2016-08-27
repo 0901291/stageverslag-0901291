@@ -5,18 +5,14 @@ import * as achievementActions from '../../actions/achievementActions';
 import {Link} from 'react-router';
 import achievementModel from '../../models/achievementModel';
 
-class Achievement extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            achievement: Object.assign({}, achievementModel, props.achievement)
-        }
-    }
+const Achievement = ({achievement, references}) => {
+    console.log(references);
+    references = references.map(reference =>
+      <li key={reference.id}><Link to={`/${reference.content_type}s/${reference.id}`}>{reference.title}</Link></li>
+    );
 
-    render() {
-        const achievement = this.props.achievement;
-        return (
-          <div>
+    return (
+        <div>
               <Link to={`/achievements/${achievement.id}/edit`}
                     className="btn btn-lg btn-primary">Edit achievement</Link>
               <h1>{achievement.title}</h1>
@@ -26,9 +22,13 @@ class Achievement extends React.Component {
                   {' '}
                   {achievement.status.label}
               </span>
-          </div>
-        );
-    }
+              <h2>References</h2>
+              <p>Read more about this achievement on any of the following pages and/or log items.</p>
+              <ol>
+                  {references}
+              </ol>
+        </div>
+    );
 }
 
 Achievement.propTypes = {
@@ -54,11 +54,22 @@ function mapStateToProps(state, ownProps) {
         achievement = getAchievementById(state.achievements, achievementId) || achievement;
     }
 
-    const data = state[(achievement.overview_type || '') + 's'] || [];
+    let references = [];
+
+    if(state.pages.length || state.logs.length) {
+        references = achievement.references.map(reference => {
+            return state.pages.find(page => page.id === reference.value) || state.logs.find(log => log.id === reference.value) || {
+                  id: '',
+                  title: '',
+                  overview_type: ''
+              }
+        });
+    }
+
 
     return {
         achievement,
-        data
+        references
     };
 }
 
