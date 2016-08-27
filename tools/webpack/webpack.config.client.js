@@ -1,14 +1,16 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+import path from 'path';
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
 const clientConfig = {
   entry: ['babel-polyfill', './src/app.js'],
   output: {
-    path: `${__dirname}/../../dist/static`,
+    path: path.resolve(`${__dirname}/../../dist/static`),
     publicPath: '/static',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: IS_DEV ? `http://localhost:${process.env.PORT || 5000}/static` : `https://stageverslag-0901291.herokuapp.com/static`,
   },
   target: 'web',
   devtool: 'source-map',
