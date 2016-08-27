@@ -6,7 +6,6 @@ import {Link} from 'react-router';
 import achievementModel from '../../models/achievementModel';
 
 const Achievement = ({achievement, references}) => {
-    console.log(references);
     references = references.map(reference =>
       <li key={reference.id}><Link to={`/${reference.content_type}s/${reference.id}`}>{reference.title}</Link></li>
     );
@@ -18,9 +17,9 @@ const Achievement = ({achievement, references}) => {
               <h1>{achievement.title}</h1>
               <p>{achievement.body}</p>
               <span>
-                  <i className={`glyphicon ${achievement.status.class}`}></i>
+                  <i className={`glyphicon ${achievement.status && achievement.status.class}`}></i>
                   {' '}
-                  {achievement.status.label}
+                  {achievement.status && achievement.status.label}
               </span>
               <h2>References</h2>
               <p>Read more about this achievement on any of the following pages and/or log items.</p>

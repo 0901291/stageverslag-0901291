@@ -6,9 +6,9 @@ const AchievementListRow = ({achievement}) => {
       <tr>
           <td>
               <span>
-                  <i className={`glyphicon ${achievement.status.class}`}></i>
+                  <i className={`glyphicon ${achievement.status && achievement.status.class}`}></i>
                   {' '}
-                  {achievement.status.label}
+                  {achievement.status && achievement.status.label}
               </span>
           </td>
           <td><Link to={`/achievements/${achievement.id}`}>{achievement.title}</Link></td>

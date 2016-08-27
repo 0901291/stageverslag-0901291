@@ -4,7 +4,6 @@ import SelectInput from '../common/SelectInput';
 import AdvancedSelect from 'react-select';
 
 const AchievementForm = ({achievement, achievementTypes, statusTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0, referenceOptions}) => {
-    console.log(achievement.references);
     return (
       <form>
           <TextInput
@@ -26,7 +25,7 @@ const AchievementForm = ({achievement, achievementTypes, statusTypes, onSave, on
           <SelectInput
             name="status"
             label="Achievement status"
-            value={achievement.status}
+            value={typeof achievement.status == 'object' ? achievement.status.value : achievement.status}
             defaultOption="Select achievement status"
             options={statusTypes}
             onChange={onChange}

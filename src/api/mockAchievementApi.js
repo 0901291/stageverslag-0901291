@@ -86,13 +86,14 @@ class AchievementApi {
                 reject(`Title must be at least ${minAchievementTitleLength} characters.`);
             }
 
+            achievement.status = STATUSSES[achievement.status] || STATUSSES.to_do;
+
             if (achievement.id) {
                 const existingAchievementIndex = achievements.findIndex(a => a.id == achievement.id);
                 achievements.splice(existingAchievementIndex, 1, achievement);
             } else {
                 achievement.id           = generateId(achievement);
                 achievement.content_type = 'achievement';
-                achievement.status = STATUSSES[achievement.status];
                 achievements.push(achievement);
             }
 
