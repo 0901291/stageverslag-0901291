@@ -5,6 +5,8 @@ import * as achievementActions from '../../actions/achievementActions';
 import AchievementForm from './AchievementForm';
 import toastr from 'toastr';
 import achievementModel from '../../models/achievementModel';
+import achievementTypes from '../../models/achievementTypes';
+import statusTypes from '../../models/statusTypes';
 
 /**
  * ManageAchievementPage Component Class
@@ -43,9 +45,11 @@ class ManageAchievementPage extends React.Component {
         const achievement    = this.state.achievement;
         if(Array.isArray(event)) { // Redux select component calls onChange with value object, not Event object
             achievement.references = event;
-        } else {
+        } else if(event) {
             const field        = event.target.name;
             achievement[field] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+        } else {
+            achievement.references = [];
         }
         return this.setState({achievement});
     }
@@ -179,43 +183,12 @@ function mapStateToProps(state, ownProps) {
         achievement = getAchievementById_(state.achievements, achievementId);
     }
 
-    const achievementTypes = [
-        {
-            value: "Analyseren",
-            text: "Analyseren"
-        },
-        {
-            value: "Adviseren",
-            text: "Adviseren"
-        },
-        {
-            value: "Ontwerpen",
-            text: "Ontwerpen"
-        },
-        {
-            value: "Realiseren",
-            text: "Realiseren"
-        },
-        {
-            value: "Implementeren",
-            text: "Implementeren"
+    const formattedStatusTypes = statusTypes.map(type => {
+        return {
+            value: type.value,
+            text: type.label
         }
-    ];
-
-    const statusTypes = [
-        {
-            value: "to_do",
-            text: "To do"
-        },
-        {
-            value: "in_progress",
-            text: "In progress"
-        },
-        {
-            value: "done",
-            text: "Done"
-        }
-    ];
+    })
 
     let referenceOptions = [];
     if(state.pages.length) { // Pages are present
@@ -228,12 +201,19 @@ function mapStateToProps(state, ownProps) {
         });
     }
 
+    const formattedAchievementTypes = achievementTypes.map(type => {
+        return {
+            value: type.value,
+            text: type.label
+        }
+    });
+
     return {
         achievement,
-        achievementTypes,
+        achievementTypes: formattedAchievementTypes,
         editing,
         referenceOptions,
-        statusTypes
+        statusTypes: formattedStatusTypes
     };
 }
 

@@ -28,7 +28,7 @@ const Page = ({page, data}) => {
             OverviewPage = PageList;
     }
     return (
-      <div>
+      <div className='overview-page'>
           {page.type === 'overview' &&
           <Link to={`/${page.overview_type}s/add`} className="btn btn-primary btn-lg">Add
               new {page.overview_type}</Link>}

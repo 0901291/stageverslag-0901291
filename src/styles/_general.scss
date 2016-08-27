@@ -27,3 +27,10 @@ td.body {
   overflow: hidden;
   max-width: 600px;
 }
+
+.form-group {
+  min-width: 200px;
+  .overview-page & {
+    max-width: 300px;
+  }
+}

@@ -18,6 +18,7 @@ const AchievementListRow = ({achievement}) => {
               </span>
           </td>
           <td><Link to={`/achievements/${achievement.id}`}>{achievement.title}</Link></td>
+          <td>{achievement.type}</td>
           <td className='body'>{achievement.body}</td>
       </tr>
     );
