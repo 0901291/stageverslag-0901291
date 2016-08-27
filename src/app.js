@@ -9,20 +9,13 @@ import {loadAchievements} from './actions/achievementActions';
 import {loadPages} from './actions/pageActions';
 import {loadLogs} from './actions/logActions';
 
-import './styles/styles.scss';
+import './styles/styles.scss'; // Import SASS so webpack plugin Extract text plugin can load it from the JavaScript and the sass-loader can compile it to CSS
 
-const serverState = JSON.stringify(window.INITIAL_STATE);
-const localStorageCopy = typeof localStorage !== 'undefined' && localStorage.length ? localStorage.getItem('stageverslagState') : serverState ||  serverState;
+const serverState = JSON.stringify(window.INITIAL_STATE); // Initial state provided by the server and injected into the window
+const localStorageCopy = typeof localStorage !== 'undefined' && localStorage.length ? localStorage.getItem('stageverslagState') : serverState ||  serverState; // Try to get a state from the browser's localStorage, when none is availble, use the server side generated state
 
-// Get the initial state of the app injected at server render.
-const initialState = JSON.parse(localStorageCopy);
-const store        = configureStore(initialState);
-
-if(!Object.keys(initialState).length || !initialState.pages.length) {
-    store.dispatch(loadAchievements());
-    store.dispatch(loadPages());
-    store.dispatch(loadLogs());
-}
+const initialState = JSON.parse(localStorageCopy); // Parse JSON string to JSON object
+const store        = configureStore(initialState); // Create store from initialState
 
 render(
   <Provider store={store}>

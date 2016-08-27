@@ -42,9 +42,6 @@ const serverConfig = {
 };
 
 if (IS_DEV) {
-  /**
-   * Maybe use this later?
-   **/
 } else {
   serverConfig.plugins.push(
     new webpack.DefinePlugin({

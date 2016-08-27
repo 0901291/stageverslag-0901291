@@ -5,6 +5,11 @@ import productionMiddleware from './middleware/productionMiddleware.js';
 
 const IS_DEV = process.env.NODE_ENV !== 'production';
 
+/**
+ * Express server based on environment
+ *
+ * @returns Express app
+ */
 export default function configureServer() {
   const app = express();
 

@@ -5,6 +5,6 @@ const achievementModel = {
     type: '',
     status: 'to_do',
     references: []
-};
+}; // Default achievement object
 
 export default achievementModel;

@@ -3,4 +3,4 @@ export default {
     logs: [],
     pages: [],
     numAjaxCallsInProgress: 0
-};
+}; // Application's initial state
