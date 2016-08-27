@@ -73,12 +73,12 @@ export function loadLogs() {
  * @returns {*} Promise that gets resolved when API call is done
  */
 export function saveLog(log) {
-    const c = Object.assign({}, log);
+    const l = Object.assign({}, log);
     return dispatch => {
         dispatch(beginAjaxCall());
         return logApi.saveLog(log)
           .then(log => {
-              c.id ? dispatch(updateLogSuccess(log)) : dispatch(createLogSuccess(log));
+              l.id ? dispatch(updateLogSuccess(log)) : dispatch(createLogSuccess(log));
           })
           .catch(error => {
               dispatch(ajaxCallError(error));

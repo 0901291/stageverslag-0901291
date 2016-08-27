@@ -73,12 +73,12 @@ export function loadAchievements() {
  * @returns {*} Promise that gets resolved when API call is done
  */
 export function saveAchievement(achievement) {
-    const c = Object.assign({}, achievement);
+    const a = Object.assign({}, achievement);
     return dispatch => {
         dispatch(beginAjaxCall());
         return achievementApi.saveAchievement(achievement)
           .then(achievement => {
-              c.id ? dispatch(updateAchievementSuccess(achievement)) : dispatch(createAchievementSuccess(achievement));
+              a.id ? dispatch(updateAchievementSuccess(achievement)) : dispatch(createAchievementSuccess(achievement));
           })
           .catch(error => {
               dispatch(ajaxCallError(error));
