@@ -54,7 +54,7 @@ Achievement.contextTypes = {
  */
 function getAchievementById_(achievements, id) {
     const achievement = achievements.find(achievement => achievement.id === id);
-    if (achievement) return achievement;
+    if (achievement) return Object.assign({}, achievement);
     return achievementModel;
 }
 

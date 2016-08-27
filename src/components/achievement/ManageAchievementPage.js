@@ -59,6 +59,7 @@ class ManageAchievementPage extends React.Component {
         event.preventDefault();
         this.setState({saving: true});
         toastr.clear();
+        console.log(this.state.achievement);
         this.props.actions.saveAchievement(this.state.achievement) // Dispatch save action
           .then(() => this.redirect(keepEditing))
           .catch(error => {
