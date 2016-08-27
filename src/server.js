@@ -7,6 +7,9 @@ import configureStore from './store/configureStore';
 import routes from './routes';
 import configureServer from '../tools/server/configureServer';
 import initialState from './reducers/initialState';
+import {loadAchievements} from './actions/achievementActions';
+import {loadPages} from './actions/pageActions';
+import {loadLogs} from './actions/logActions';
 
 const app = express();
 
@@ -26,16 +29,25 @@ app.get('*', (req, res) => {
             // Set initialState here if needed.
 
             const store = configureStore(initialState);
-            const react = (
-              <Provider store={store}>
-                  <RouterContext {...props} />
-              </Provider>
-            );
 
-            const reactString = renderToString(react);
-            const finalState  = store.getState();
+            const promises = [
+                store.dispatch(loadAchievements()),
+                store.dispatch(loadPages()),
+                store.dispatch(loadLogs())
+            ]
 
-            res.render('index', {reactString, finalState});
+            Promise.all(promises).then(() => {
+                const react = (
+                  <Provider store={store}>
+                      <RouterContext {...props} />
+                  </Provider>
+                );
+
+                const reactString = renderToString(react);
+
+                const finalState  = store.getState();
+                res.render('index', {reactString, finalState});
+            })
         }
     });
 });
