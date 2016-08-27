@@ -1,5 +1,18 @@
 import React, {PropTypes} from 'react';
 
+/**
+ * SelectInput Component
+ * @param name
+ * @param label
+ * @param onChange
+ * @param defaultOption
+ * @param value
+ * @param error
+ * @param options
+ * @param wrapperClass
+ * @returns {*} React Component
+ * @constructor
+ */
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options, wrapperClass = []}) => {
     wrapperClass.push('form-group');
 

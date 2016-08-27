@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 import AchievementListRow from './AchievementListRow.js';
 
+/**
+ * AchievementList Component
+ * @param data Array with items to list
+ * @returns {*} React Component
+ * @constructor
+ */
 const AchievementList = ({data}) => {
     return (
       <table>

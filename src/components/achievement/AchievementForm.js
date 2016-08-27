@@ -3,6 +3,22 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import AdvancedSelect from 'react-select';
 
+/**
+ * AchievementForm Component
+ * @param achievement Achievement to manage
+ * @param achievementTypes Array of achievement types options
+ * @param statusTypes Array of status types options
+ * @param onSave Method to call when saving the achievement
+ * @param onDelete Method to call when deleting the achievement
+ * @param onChange Method to call when changing a value of the form
+ * @param saving bool True when save action is currently running, false when not
+ * @param editing bool True when editing an existing achievement, false when creating a new one
+ * @param errors Object containing form errors
+ * @param deleteState State to track delete confirmation
+ * @param referenceOptions Array of references options
+ * @returns {*} React Component
+ * @constructor
+ */
 const AchievementForm = ({achievement, achievementTypes, statusTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0, referenceOptions}) => {
     return (
       <form>

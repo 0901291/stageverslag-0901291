@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
+/**
+ * AchievementListRow Component
+ * @param achievement Achievement to build a list item of
+ * @returns {*} React Component
+ * @constructor
+ */
 const AchievementListRow = ({achievement}) => {
     return (
       <tr>

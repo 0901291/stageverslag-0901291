@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 import LogListRow from './LogListRow.js';
 
+/**
+ * LogList Component
+ * @param data Array with items to list
+ * @returns {*} React Component
+ * @constructor
+ */
 const LogList = ({data}) => {
     return (
       <table>

@@ -2,6 +2,21 @@ import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
+/**
+ * PageForm Component
+ * @param page Page to manage
+ * @param pageTypes Array of page types options
+ * @param overviewTypes Array of overview types options
+ * @param onSave Method to call when saving the page
+ * @param onDelete Method to call when deleting the page
+ * @param onChange Method to call when changing a value of the form
+ * @param saving bool True when save action is currently running, false when not
+ * @param editing bool True when editing an existing page, false when creating a new one
+ * @param errors Object containing form errors
+ * @param deleteState State to track delete confirmation
+ * @returns {*} React Component
+ * @constructor
+ */
 const PageForm = ({page, pageTypes, overviewTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0}) => {
     return (
       <form>

@@ -5,8 +5,9 @@ import initialState from './initialState';
  * Function to check if the passed string ends in success, because then the request was successful
  * @param type string String to check
  * @returns boolean Returns if type ends with _SUCCESS or not
+ * @private
  */
-function actionTypeEndsInSuccess(type) {
+function actionTypeEndsInSuccess_(type) {
     return type.endsWith('_SUCCESS');
 }
 

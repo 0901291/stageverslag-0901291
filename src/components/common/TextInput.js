@@ -1,5 +1,19 @@
 import React, {PropTypes} from 'react';
 
+/**
+ * TextInput Component
+ * @param name
+ * @param label
+ * @param onChange
+ * @param placeholder
+ * @param value
+ * @param error
+ * @param type
+ * @param wrapperClass
+ * @param checked
+ * @returns {*} React Component
+ * @constructor
+ */
 const TextInput = ({name, label, onChange, placeholder, value, error, type = "text", wrapperClass = [], checked}) => {
     wrapperClass.push('form-group');
     if (error && error.length > 0) {

@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
-
+/**
+ * LoadingDots Component by Cory House
+ */
 class LoadingDots extends React.Component {
     constructor(props, context) {
         super(props, context);

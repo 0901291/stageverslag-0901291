@@ -1,9 +1,20 @@
 import React, {PropTypes} from 'react';
 import TextInput from '../common/TextInput';
-import SelectInput from '../common/SelectInput';
-import AdvancedSelect from 'react-select';
 
-const LogForm = ({log, logTypes, statusTypes, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0, referenceOptions}) => {
+/**
+ * LogForm Component
+ * @param log Log to manage
+ * @param onSave Method to call when saving the log item
+ * @param onDelete onDelete Method to call when deleting the log item
+ * @param onChange onChange Method to call when changing a value of the form
+ * @param saving bool True when save action is currently running, false when not
+ * @param editing bool True when editing an existing log item, false when creating a new one
+ * @param errors Object containing form errors
+ * @param deleteState State to track delete confirmation
+ * @returns {*} React Component
+ * @constructor
+ */
+const LogForm = ({log, onSave, onDelete, onChange, saving = false, editing = false, errors, deleteState = 0}) => {
     return (
       <form>
           <TextInput

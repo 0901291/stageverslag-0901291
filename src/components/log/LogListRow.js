@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
+/**
+ * LogListRow Component
+ * @param log Log item to build a list item of
+ * @returns {*} React Component
+ * @constructor
+ */
 const LogListRow = ({log}) => {
     return (
       <tr>

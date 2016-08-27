@@ -5,25 +5,20 @@ import * as logActions from '../../actions/logActions';
 import {Link} from 'react-router';
 import logModel from '../../models/logModel';
 
-class Log extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            log: Object.assign({}, logModel, props.log)
-        }
-    }
-
-    render() {
-        const log = this.props.log;
-        return (
-          <div>
-              <Link to={`/logs/${log.id}/edit`}
-                    className="btn btn-lg btn-primary">Edit log</Link>
-              <h1>{log.title}</h1>
-              <p>{log.body}</p>
-          </div>
-        );
-    }
+/**
+ * Log detail component
+ * @param log Log that is viewed
+ * @returns {*} React Component
+ * @constructor
+ */
+const Log = ({log}) => {
+    return (
+      <div>
+          <Link to={`/logs/${log.id}/edit`} className="btn btn-lg btn-primary">Edit log</Link>
+          <h1>{log.title}</h1>
+          <p>{log.body}</p>
+      </div>
+    );
 }
 
 Log.propTypes = {
@@ -34,33 +29,48 @@ Log.contextTypes = {
     router: PropTypes.object.isRequired
 };
 
-function getLogById(logs, id) {
+/**
+ * Find and return a log item by id.
+ * @param log items Array with all log items in application state to search through
+ * @param id Achievement id to get log item object of
+ * @returns {object} Return found log item or if not found the logModel
+ * @private
+ */
+function getLogById_(logs, id) {
     const log = logs.find(log => log.id === id);
     if (log) return log;
-    return null;
+    return logModel;
 }
 
+/**
+ * Format the props needed by the component.
+ * @param state Current application state object
+ * @param ownProps Props passed by the parent component
+ * @returns {{log: {id: string, title: string, body: string, type: string}}} Props to use in the component
+ */
 function mapStateToProps(state, ownProps) {
     let log = logModel;
 
-    const logId = ownProps.params.id || ownProps.route.log;
+    const logId = ownProps.params.id || ownProps.route.log; // Log item ID can be passed through params or the router itself
 
-    if (logId && state.logs.length > 0) {
-        log = getLogById(state.logs, logId) || log;
+    if (logId && state.logs.length > 0) { // Get log item when there is an ID and there are logs
+        log = getLogById_(state.logs, logId) || log;
     }
 
-    const data = state[(log.overview_type || '') + 's'] || [];
-
     return {
-        log,
-        data
+        log
     };
 }
 
+/**
+ * Bind and connect all actions to component and Redux store
+ * @param dispatch
+ * @returns {{actions: *}}
+ */
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(logActions, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Log);
+export default connect(mapStateToProps, mapDispatchToProps)(Log); // Connect component to Redux store and pass the component to the result of the Redux connect function

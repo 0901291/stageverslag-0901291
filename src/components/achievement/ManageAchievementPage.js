@@ -6,42 +6,42 @@ import AchievementForm from './AchievementForm';
 import toastr from 'toastr';
 import achievementModel from '../../models/achievementModel';
 
+/**
+ * ManageAchievementPage Component Class
+ */
 class ManageAchievementPage extends React.Component {
     constructor(props, context) {
-        super(props, context);
+        super(props, context); // Always call super when overriding the React.Component constructor
 
         this.state = {
-            achievement: Object.assign({}, achievementModel, props.achievement),
+            achievement: Object.assign({}, achievementModel, props.achievement), // Make a copy of the merged achievementModel and optionally received achievement when editing
             errors: {},
             saving: false,
             deleteState: 0,
-            appIsMounted: false,
             achievementTypes: [],
             overviewTypes: [],
             editing: props.editing || false
-        };
+        }; // Setup form state with initial values
 
-        this.saveAchievement        = this.saveAchievement.bind(this);
-        this.updateAchievementState = this.updateAchievementState.bind(this);
-        this.deleteAchievement      = this.deleteAchievement.bind(this);
-    }
-
-    componentDidMount() {
-        requestAnimationFrame(() => {
-            this.setState({appIsMounted: true});
-        });
+        this.saveAchievement        = this.saveAchievement.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
+        this.updateAchievementState = this.updateAchievementState.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
+        this.deleteAchievement      = this.deleteAchievement.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.achievement.id != nextProps.achievement.id) {
-            // Necessary to populate form when existing achievement is loaded directly.
-            this.setState({achievement: Object.assign({}, nextProps.achievement), editing: true});
+        if (this.props.achievement.id != nextProps.achievement.id) { // Check if receieved (nextProps) achievement id is not already the known achievement id
+            this.setState({achievement: Object.assign({}, nextProps.achievement), editing: true}); // Necessary to populate form when existing achievement is loaded directly through url.
         }
     }
 
+    /**
+     * Method to call on every change in the form
+     * @param event
+     * @returns {*}
+     */
     updateAchievementState(event) {
         const achievement    = this.state.achievement;
-        if(Array.isArray(event)) {
+        if(Array.isArray(event)) { // Redux select component calls onChange with value object, not Event object
             achievement.references = event;
         } else {
             const field        = event.target.name;
@@ -50,11 +50,16 @@ class ManageAchievementPage extends React.Component {
         return this.setState({achievement});
     }
 
+    /**
+     * Method called when submitting the form
+     * @param event
+     * @param keepEditing Set to true to save achievement and go to the edit page. Omit, or set to false to redirect to the achievement page after saving
+     */
     saveAchievement(event, keepEditing = false) {
         event.preventDefault();
         this.setState({saving: true});
         toastr.clear();
-        this.props.actions.saveAchievement(this.state.achievement)
+        this.props.actions.saveAchievement(this.state.achievement) // Dispatch save action
           .then(() => this.redirect(keepEditing))
           .catch(error => {
               toastr.error(error);
@@ -62,23 +67,27 @@ class ManageAchievementPage extends React.Component {
           });
     }
 
+    /**
+     * Method called when delete button is clicked
+     * @param event
+     */
     deleteAchievement(event = false) {
-        if (!event) {
+        if (!event) { // When false or nothing is passed, initialise deleteState
             this.setState({deleteState: 0});
         } else {
-            if (event !== true) {
+            if (event !== true) { // If event really is an Event, preventDefault submission
                 event.preventDefault();
             }
-            this.setState({deleteState: ++this.state.deleteState});
+            this.setState({deleteState: ++this.state.deleteState}); // Increment deleteState
         }
-        if (this.state.deleteState === 1) {
-            toastr.options.timeOut = 0;
-            toastr.warning('Sure you want to delete this achievement? Click again to confirm.');
-            toastr.options.timeOut = 5000;
-        } else if (this.state.deleteState === 2) {
+        if (this.state.deleteState === 1) { // When user clicks for the first time
+            toastr.options.timeOut = 0; // Disable toastr timeout
+            toastr.warning('Sure you want to delete this achievement? Click again to confirm.'); // Show warning message
+            toastr.options.timeOut = 5000; // Reset toastr timeout.
+        } else if (this.state.deleteState === 2) { // When users clicks for the second time and confirms deletion
             const achievement = this.state.achievement;
-            toastr.clear();
-            this.props.actions.deleteAchievement(achievement)
+            toastr.clear(); // Clear warning toastr
+            this.props.actions.deleteAchievement(achievement) // Dispatch delete action
               .then(() => this.redirectAfterDelete(achievement))
               .catch(error => {
                   console.error(error);
@@ -88,12 +97,20 @@ class ManageAchievementPage extends React.Component {
         }
     }
 
+    /**
+     * Redirect after saving
+     * @param keepEditing Set to true to save achievement and go to the edit page. Omit, or set to false to redirect to the achievement page after saving
+     */
     redirect(keepEditing = false) {
         this.setState({saving: false});
         toastr.success('Achievement saved');
         this.context.router.push(keepEditing ? `/achievements/${this.state.achievement.id}/edit` : `/achievements/${this.state.achievement.id}`);
     }
 
+    /**
+     * Redirect after deletion
+     * @param achievement Deleted achievement
+     */
     redirectAfterDelete(achievement) {
         this.setState({deleting: false});
         toastr.success(`Achievement <strong>${achievement.title}</strong> deleted`);
@@ -131,21 +148,34 @@ ManageAchievementPage.contextTypes = {
     router: PropTypes.object.isRequired
 };
 
-function getAchievementById(achievements, id) {
+/**
+ * Find and return an achievement by id.
+ * @param achievements Array with all achievements in application state to search through
+ * @param id Achievement id to get achievement object of
+ * @returns {object} Return found achievement or if not found the achievementModel
+ * @private
+ */
+function getAchievementById_(achievements, id) {
     const achievement = achievements.find(achievement => achievement.id === id);
-    if (achievement) return achievement; //since filter returns an array, have to grab the first.
+    if (achievement) return achievement;
     return achievementModel;
 }
 
+/**
+ * Format the props needed by the component.
+ * @param state Current application state object
+ * @param ownProps Props passed by the parent component
+ * @returns {{achievement: {id: string, title: string, body: string, type: string, status: string, references: Array}, achievementTypes: *[], editing: (*|boolean), referenceOptions: Array, statusTypes: *[]}} Props to use in the component
+ */
 function mapStateToProps(state, ownProps) {
     let achievement = achievementModel;
 
     const achievementId = ownProps.params.id;
 
-    const editing = achievementId && state.achievements.length > 0;
+    const editing = achievementId && state.achievements.length > 0; // Achievement id is present
 
     if (editing) {
-        achievement = getAchievementById(state.achievements, achievementId);
+        achievement = getAchievementById_(state.achievements, achievementId);
     }
 
     const achievementTypes = [
@@ -187,9 +217,9 @@ function mapStateToProps(state, ownProps) {
     ];
 
     let referenceOptions = [];
-    if(state.pages.length) {
-        const options = [...state.pages, ...state.logs];
-        referenceOptions = options.map(option => {
+    if(state.pages.length) { // Pages are present
+        const options = [...state.pages, ...state.logs]; // Merge pages and logs to one references array
+        referenceOptions = options.map(option => { // Format items to real option values
             return {
                 value: option.id,
                 label: `${option.title} (${option.content_type})`
@@ -206,10 +236,15 @@ function mapStateToProps(state, ownProps) {
     };
 }
 
+/**
+ * Bind and connect all actions to component and Redux store
+ * @param dispatch
+ * @returns {{actions: *}}
+ */
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(achievementActions, dispatch),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageAchievementPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageAchievementPage); // Connect component to Redux store and pass the component to the result of the Redux connect function

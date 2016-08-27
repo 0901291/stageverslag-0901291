@@ -6,42 +6,42 @@ import LogForm from './LogForm';
 import toastr from 'toastr';
 import logModel from '../../models/logModel';
 
+/**
+ * ManageLogPage Component Class
+ */
 class ManageLogPage extends React.Component {
     constructor(props, context) {
-        super(props, context);
+        super(props, context); // Always call super when overriding the React.Component constructor
 
         this.state = {
-            log: Object.assign({}, logModel, props.log),
+            log: Object.assign({}, logModel, props.log), // Make a copy of the merged logModel and optionally received log when editing
             errors: {},
             saving: false,
             deleteState: 0,
-            appIsMounted: false,
             logTypes: [],
             overviewTypes: [],
             editing: props.editing || false
-        };
+        }; // Setup form state with initial values
 
-        this.saveLog        = this.saveLog.bind(this);
-        this.updateLogState = this.updateLogState.bind(this);
-        this.deleteLog      = this.deleteLog.bind(this);
-    }
-
-    componentDidMount() {
-        requestAnimationFrame(() => {
-            this.setState({appIsMounted: true});
-        });
+        this.saveLog        = this.saveLog.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
+        this.updateLogState = this.updateLogState.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
+        this.deleteLog      = this.deleteLog.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.log.id != nextProps.log.id) {
-            // Necessary to populate form when existing log is loaded directly.
-            this.setState({log: Object.assign({}, nextProps.log), editing: true});
+        if (this.props.log.id != nextProps.log.id) { // Check if receieved (nextProps) log item id is not already the known log id
+            this.setState({log: Object.assign({}, nextProps.log), editing: true}); // Necessary to populate form when existing log is loaded directly through url.
         }
     }
 
+    /**
+     * Method to call on every change in the form
+     * @param event
+     * @returns {*}
+     */
     updateLogState(event) {
         const log    = this.state.log;
-        if(Array.isArray(event)) {
+        if(Array.isArray(event)) { // Redux select component calls onChange with value object, not Event object
             log.references = event;
         } else {
             const field        = event.target.name;
@@ -50,11 +50,16 @@ class ManageLogPage extends React.Component {
         return this.setState({log});
     }
 
+    /**
+     * Method called when submitting the form
+     * @param event
+     * @param keepEditing Set to true to save log item and go to the edit page. Omit, or set to false to redirect to the log item page after saving
+     */
     saveLog(event, keepEditing = false) {
         event.preventDefault();
         this.setState({saving: true});
         toastr.clear();
-        this.props.actions.saveLog(this.state.log)
+        this.props.actions.saveLog(this.state.log) // Dispatch save action
           .then(() => this.redirect(keepEditing))
           .catch(error => {
               toastr.error(error);
@@ -62,23 +67,27 @@ class ManageLogPage extends React.Component {
           });
     }
 
+    /**
+     * Method called when delete button is clicked
+     * @param event
+     */
     deleteLog(event = false) {
-        if (!event) {
+        if (!event) { // When false or nothing is passed, initialise deleteState
             this.setState({deleteState: 0});
         } else {
-            if (event !== true) {
+            if (event !== true) { // If event really is an Event, preventDefault submission
                 event.preventDefault();
             }
-            this.setState({deleteState: ++this.state.deleteState});
+            this.setState({deleteState: ++this.state.deleteState}); // Increment deleteState
         }
-        if (this.state.deleteState === 1) {
-            toastr.options.timeOut = 0;
-            toastr.warning('Sure you want to delete this log? Click again to confirm.');
-            toastr.options.timeOut = 5000;
-        } else if (this.state.deleteState === 2) {
+        if (this.state.deleteState === 1) { // When user clicks for the first time
+            toastr.options.timeOut = 0; // Disable toastr timeout
+            toastr.warning('Sure you want to delete this log item? Click again to confirm.'); // Show warning message
+            toastr.options.timeOut = 5000; // Reset toastr timeout.
+        } else if (this.state.deleteState === 2) { // When users clicks for the second time and confirms deletion
             const log = this.state.log;
-            toastr.clear();
-            this.props.actions.deleteLog(log)
+            toastr.clear(); // Clear warning toastr
+            this.props.actions.deleteLog(log) // Dispatch delete action
               .then(() => this.redirectAfterDelete(log))
               .catch(error => {
                   console.error(error);
@@ -88,12 +97,20 @@ class ManageLogPage extends React.Component {
         }
     }
 
+    /**
+     * Redirect after saving
+     * @param keepEditing Set to true to save log item and go to the edit page. Omit, or set to false to redirect to the log item page after saving
+     */
     redirect(keepEditing = false) {
         this.setState({saving: false});
         toastr.success('Log saved');
         this.context.router.push(keepEditing ? `/logs/${this.state.log.id}/edit` : `/logs/${this.state.log.id}`);
     }
 
+    /**
+     * Redirect after deletion
+     * @param log Deleted log item
+     */
     redirectAfterDelete(log) {
         this.setState({deleting: false});
         toastr.success(`Log <strong>${log.title}</strong> deleted`);
@@ -131,85 +148,51 @@ ManageLogPage.contextTypes = {
     router: PropTypes.object.isRequired
 };
 
-function getLogById(logs, id) {
+/**
+ * Find and return a log item by id.
+ * @param logs Array with all logs in application state to search through
+ * @param id Log item id to get log object of
+ * @returns {object} Return found log item or if not found the logModel
+ * @private
+ */
+function getLogById_(logs, id) {
     const log = logs.find(log => log.id === id);
-    if (log) return log; //since filter returns an array, have to grab the first.
+    if (log) return log;
     return logModel;
 }
 
+/**
+ * Format the props needed by the component.
+ * @param state Current application state object
+ * @param ownProps Props passed by the parent component
+ * @returns {{log: {id: string, title: string, body: string, type: string}, logTypes: *[], editing: (*|boolean), referenceOptions: Array, statusTypes: *[]}} Props to use in the component
+ */
 function mapStateToProps(state, ownProps) {
     let log = logModel;
 
     const logId = ownProps.params.id;
 
-    const editing = logId && state.logs.length > 0;
+    const editing = logId && state.logs.length > 0;  // Log item id is present
 
     if (editing) {
-        log = getLogById(state.logs, logId);
-    }
-
-    const logTypes = [
-        {
-            value: "Analyseren",
-            text: "Analyseren"
-        },
-        {
-            value: "Adviseren",
-            text: "Adviseren"
-        },
-        {
-            value: "Ontwerpen",
-            text: "Ontwerpen"
-        },
-        {
-            value: "Realiseren",
-            text: "Realiseren"
-        },
-        {
-            value: "Implementeren",
-            text: "Implementeren"
-        }
-    ];
-
-    const statusTypes = [
-        {
-            value: "to_do",
-            text: "To do"
-        },
-        {
-            value: "in_progress",
-            text: "In progress"
-        },
-        {
-            value: "done",
-            text: "Done"
-        }
-    ];
-
-    let referenceOptions = [];
-    if(state.pages.length) {
-        const options = [...state.pages, ...state.logs];
-        referenceOptions = options.map(option => {
-            return {
-                value: option.id,
-                label: `${option.title} (${option.content_type})`
-            }
-        });
+        log = getLogById_(state.logs, logId);
     }
 
     return {
         log,
-        logTypes,
-        editing,
-        referenceOptions,
-        statusTypes
+        editing
     };
 }
 
+/**
+ * Bind and connect all actions to component and Redux store
+ * @param dispatch
+ * @returns {{actions: *}}
+ */
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(logActions, dispatch),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageLogPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageLogPage); // Connect component to Redux store and pass the component to the result of the Redux connect function

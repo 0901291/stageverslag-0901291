@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
+/**
+ * PageListRow Component
+ * @param page Page to build a list item of
+ * @returns {*} React Component
+ * @constructor
+ */
 const PageListRow = ({page}) => {
     return (
       <tr>
