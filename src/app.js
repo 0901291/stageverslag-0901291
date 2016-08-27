@@ -12,7 +12,8 @@ import {loadLogs} from './actions/logActions';
 import './styles/styles.scss';
 
 const serverState = JSON.stringify(window.INITIAL_STATE);
-const localStorageCopy = typeof localStorage !== 'undefined' ? localStorage.getItem('stageverslagState') : serverState ||  serverState;
+const localStorageCopy = typeof localStorage !== 'undefined' && localStorage.length ? localStorage.getItem('stageverslagState') : serverState ||  serverState;
+
 // Get the initial state of the app injected at server render.
 const initialState = JSON.parse(localStorageCopy);
 const store        = configureStore(initialState);
