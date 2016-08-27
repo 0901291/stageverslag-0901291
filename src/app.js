@@ -11,13 +11,17 @@ import {loadLogs} from './actions/logActions';
 
 import './styles/styles.scss';
 
+const serverState = JSON.stringify(window.INITIAL_STATE);
+const localStorageCopy = typeof localStorage !== 'undefined' ? localStorage.getItem('stageverslagState') : serverState ||  serverState;
 // Get the initial state of the app injected at server render.
-const initialState = window.INITIAL_STATE;
+const initialState = JSON.parse(localStorageCopy);
 const store        = configureStore(initialState);
 
-store.dispatch(loadAchievements());
-store.dispatch(loadPages());
-store.dispatch(loadLogs());
+if(!Object.keys(initialState).length || !initialState.pages.length) {
+    store.dispatch(loadAchievements());
+    store.dispatch(loadPages());
+    store.dispatch(loadLogs());
+}
 
 render(
   <Provider store={store}>
