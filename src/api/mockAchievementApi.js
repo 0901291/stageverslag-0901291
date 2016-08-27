@@ -82,7 +82,7 @@ class AchievementApi {
     static saveAchievement(achievement) {
         return new Promise((resolve, reject) => {
             const minAchievementTitleLength = 1;
-            if (achievement.title.length < minAchievementTitleLength) {
+            if (achievement.title.length < minAchievementTitleLength || generateId(achievement).length < minAchievementTitleLength) {
                 reject(`Title must be at least ${minAchievementTitleLength} characters.`);
             }
 

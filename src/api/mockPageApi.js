@@ -69,7 +69,7 @@ class PageApi {
     static savePage(page) {
         return new Promise((resolve, reject) => {
             const minPageTitleLength = 1;
-            if (page.title.length < minPageTitleLength) {
+            if (page.title.length < minPageTitleLength || generateId(page).length < minPageTitleLength) {
                 reject(`Title must be at least ${minPageTitleLength} characters.`);
             }
 

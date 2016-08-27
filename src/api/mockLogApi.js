@@ -49,7 +49,7 @@ class LogApi {
     static saveLog(log) {
         return new Promise((resolve, reject) => {
             const minLogTitleLength = 1;
-            if (log.title.length < minLogTitleLength) {
+            if (log.title.length < minLogTitleLength || generateId(log).length < minLogTitleLength) {
                 reject(`Title must be at least ${minLogTitleLength} characters.`);
             }
 
