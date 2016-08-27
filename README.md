@@ -2,7 +2,7 @@
 
 Find a demo of this app <a href="https://stageverslag-0901291.herokuapp.com" target="_blank">right here</a>.
 
-Stageverslag-0901291 is a web-app in ReactJS with the power of Redux behind it. With this app you can manage your internship. You can manage which achievements you can accomplish during this internship and what your status is per achievement. You can add pages to simply show some text, but overview pages to show a type on (achievements, logs or pages).
+Stageverslag-0901291 is a web-app in ReactJS with the power of Redux behind it. With this app you can manage your internship. You can manage which achievements you can accomplish during this internship and what your status is per achievement. You can add pages to simply show some text, and overview pages to list a certain type on (achievements, logs or pages).
 
 ## Features
 - Manage (add/edit/delete) pages and your app's header
