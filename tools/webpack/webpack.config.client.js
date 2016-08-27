@@ -7,7 +7,7 @@ const IS_DEV = process.env.NODE_ENV !== 'production';
 const clientConfig = {
   entry: ['babel-polyfill', './src/app.js'],
   output: {
-    path: path.resolve(`${__dirname}/../../dist/static`),
+    path: path.resolve(__dirname, '/static'),
     publicPath: '/static',
     filename: 'bundle.js',
     publicPath: IS_DEV ? `http://localhost:${process.env.PORT || 5000}/static` : `https://stageverslag-0901291.herokuapp.com/static`,
