@@ -69,7 +69,7 @@ function mapStateToProps(state, ownProps) {
         page = getPageById(state.pages, pageId) || page;
     }
 
-    const data = state[(page.overview_type || '') + 's'] || [];
+    let data = state[(page.overview_type || '') + 's'] || [];
 
     return {
         page,

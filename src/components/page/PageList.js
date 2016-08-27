@@ -11,8 +11,8 @@ const PageList = ({data}) => {
           </tr>
           </thead>
           <tbody>
-          {data.map(item =>
-            <PageListRow key={item.id} item={item}/>
+          {data.map(page =>
+            <PageListRow key={page.id} page={page}/>
           )}
           </tbody>
       </table>

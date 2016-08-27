@@ -21,6 +21,11 @@ class Achievement extends React.Component {
                     className="btn btn-lg btn-primary">Edit achievement</Link>
               <h1>{achievement.title}</h1>
               <p>{achievement.body}</p>
+              <span>
+                  <i className={`glyphicon ${achievement.status.class}`}></i>
+                  {' '}
+                  {achievement.status.label}
+              </span>
           </div>
         );
     }

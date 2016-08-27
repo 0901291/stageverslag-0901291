@@ -1,47 +1,65 @@
+const STATUSSES = {
+    to_do: {
+        value: 'to_do',
+        label: 'To do',
+        class: 'glyphicon-inbox'
+    },
+    in_progress: {
+        value: 'in_progress',
+        label: 'In progress',
+        class: 'glyphicon-edit'
+    },
+    done: {
+        value: 'done',
+        label: 'Done',
+        class: 'glyphicon-ok'
+    }
+}
+
 const achievements = [
     {
-        id: "klantwens",
+        id: 'klantwens',
         content_type: 'achievement',
-        title: "Klantwens",
+        title: 'Klantwens',
         body: 'De echte wens van de klant in kaart kunt brengen, de \"vraag achter de vraag\".',
         type: 'Analyseren',
-        status: 'done',
+        status: STATUSSES.done,
         references: []
     },
     {
-        id: "reflecteren",
+        id: 'reflecteren',
         content_type: 'achievement',
-        title: "Reflecteren",
+        title: 'Reflecteren',
         body: 'Kunt reflecteren op eigen handelen en invloed hebt op het ontwikkelproces en daar conclusies uit kunt trekken.',
         type: 'Adviseren',
-        status: 'in_progress',
+        status: STATUSSES.in_progress,
         references: []
     },
     {
-        id: "testplan",
+        id: 'testplan',
         content_type: 'achievement',
-        title: "Testplan",
+        title: 'Testplan',
         body: 'Een testplan kunt opstellen.',
         type: 'Ontwerpen',
-        status: 'to_do',
+        status: STATUSSES.to_do,
         references: []
     },
     {
-        id: "usability-test",
+        id: 'usability-test',
         content_type: 'achievement',
-        title: "Usability test",
+        title: 'Usability test',
         body: 'Usability tests kunt opzetten en uitvoeren.',
         type: 'Realiseren',
-        status: 'to_do',
+        status: STATUSSES.to_do,
         references: []
     },
     {
-        id: "versiebeheer",
+        id: 'versiebeheer',
         content_type: 'achievement',
-        title: "Versiebeheer",
+        title: 'Versiebeheer',
         body: 'Versiebeheer kunt toepassen in het ontwikkeltraject.',
         type: 'Implementeren',
-        status: 'done',
+        status: STATUSSES.done,
         references: []
     }
 ];
@@ -74,6 +92,7 @@ class AchievementApi {
             } else {
                 achievement.id           = generateId(achievement);
                 achievement.content_type = 'achievement';
+                achievement.status = STATUSSES[achievement.status];
                 achievements.push(achievement);
             }
 

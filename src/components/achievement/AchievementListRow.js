@@ -1,17 +1,24 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
-const AchievementListRow = ({item}) => {
+const AchievementListRow = ({achievement}) => {
     return (
       <tr>
-          <td><Link to={`/achievements/${item.id}`}>{item.title}</Link></td>
-          <td>{item.body}</td>
+          <td>
+              <span>
+                  <i className={`glyphicon ${achievement.status.class}`}></i>
+                  {' '}
+                  {achievement.status.label}
+              </span>
+          </td>
+          <td><Link to={`/achievements/${achievement.id}`}>{achievement.title}</Link></td>
+          <td className='body'>{achievement.body}</td>
       </tr>
     );
 };
 
 AchievementListRow.propTypes = {
-    item: PropTypes.object.isRequired
+    achievement: PropTypes.object.isRequired
 };
 
 export default AchievementListRow;

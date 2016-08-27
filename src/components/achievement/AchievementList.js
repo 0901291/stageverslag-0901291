@@ -6,13 +6,14 @@ const AchievementList = ({data}) => {
       <table>
           <thead>
           <tr>
+              <th>Status</th>
               <th>Title</th>
               <th>Body</th>
           </tr>
           </thead>
           <tbody>
-          {data.map(item =>
-            <AchievementListRow key={item.id} item={item}/>
+          {data.map(achievement =>
+            <AchievementListRow key={achievement.id} achievement={achievement}/>
           )}
           </tbody>
       </table>
