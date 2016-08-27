@@ -35,7 +35,7 @@ app.get('*', (req, res) => { // Map every request to React
                 store.dispatch(loadAchievements()), // Load achievements from API
                 store.dispatch(loadPages()), // Load pages from API
                 store.dispatch(loadLogs()) // Load log items from API
-            ] // Array with promises returned by the API
+            ]; // Array with promises returned by the API
 
             Promise.all(promises).then(() => { // When all API requests are done, render React provider component and send all data in the store through the {store} prop
                 const react = (

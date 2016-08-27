@@ -41,22 +41,25 @@ class AchievementList extends React.Component {
 
     render () {
         const achievements = this.state.filteredAchievements;
+        const rows = achievements.map(achievement =>
+          <AchievementListRow key={achievement.id} achievement={achievement}/>
+        );
         return (
           <div>
               <AchievementFilter onFilterChange={this.onFilterChange}/>
               <table>
+                  {rows.length > 0 &&
                   <thead>
-                  <tr>
-                      <th>Status</th>
-                      <th>Title</th>
-                      <th>Category</th>
-                      <th>Body</th>
-                  </tr>
+                      <tr>
+                          <th>Status</th>
+                          <th>Title</th>
+                          <th>Category</th>
+                          <th>Body</th>
+                      </tr>
                   </thead>
+                  }
                   <tbody>
-                  {achievements.map(achievement =>
-                    <AchievementListRow key={achievement.id} achievement={achievement}/>
-                  )}
+                    {rows.length > 0 ? rows : <p>No results found...</p>}
                   </tbody>
               </table>
           </div>

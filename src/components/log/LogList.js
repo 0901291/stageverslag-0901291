@@ -8,18 +8,21 @@ import LogListRow from './LogListRow.js';
  * @constructor
  */
 const LogList = ({data}) => {
+    const rows = data.map(log =>
+      <LogListRow key={log.id} log={log}/>
+    );
     return (
       <table>
-          <thead>
-          <tr>
-              <th>Title</th>
-              <th>Body</th>
-          </tr>
-          </thead>
+          {rows.length > 0 &&
+              <thead>
+                  <tr>
+                      <th>Title</th>
+                      <th>Body</th>
+                  </tr>
+              </thead>
+          }
           <tbody>
-          {data.map(log =>
-            <LogListRow key={log.id} log={log}/>
-          )}
+            {rows.length > 0 ? rows : <p>No results found...</p>}
           </tbody>
       </table>
     );

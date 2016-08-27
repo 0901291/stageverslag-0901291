@@ -8,18 +8,21 @@ import PageListRow from './PageListRow.js';
  * @constructor
  */
 const PageList = ({data}) => {
+    const rows = data.map(page =>
+      <PageListRow key={page.id} page={page}/>
+    );
     return (
       <table>
+          {rows.length > 0 &&
           <thead>
-          <tr>
-              <th>Title</th>
-              <th>Body</th>
-          </tr>
+              <tr>
+                  <th>Title</th>
+                  <th>Body</th>
+              </tr>
           </thead>
+          }
           <tbody>
-          {data.map(page =>
-            <PageListRow key={page.id} page={page}/>
-          )}
+            {rows.length > 0 ? rows : <p>No results found...</p>}
           </tbody>
       </table>
     );

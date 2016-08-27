@@ -83,7 +83,6 @@ function mapStateToProps(state, ownProps) {
         });
     }
 
-
     return {
         achievement
     };
