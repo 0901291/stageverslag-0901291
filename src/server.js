@@ -23,6 +23,8 @@ app.get('*', (req, res) => { // Map every request to React
     match({routes, location: req.url}, (err, redirect, props) => {
         if (err) {
             res.status(500).send(err.message); // Something went wrong
+        } else if (redirect) {
+            res.redirect(302, redirect.pathname + redirect.search)
         } else if (!props) {
             res.status(404).render('404'); // Not found
         } else {

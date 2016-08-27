@@ -19,7 +19,7 @@ export default (
             <Route path='logs/:id/edit' component={ManageLogPage}/> /* Edit existing log item */
             <Route path='logs/:id' component={Log} /> /* See log item detail page */
             <Route path='pages/add' component={ManagePagePage}/> /* Add new page */
-            <Redirect from='pages/:id' to='/:id'/> /* Redirect page detail page with leading /pages to just the page id */
+            <Redirect from='pages/:id' to=':id'/> /* Redirect page detail page with leading /pages to just the page id */
             <Route path='pages/:id/edit' component={ManagePagePage}/> /* Edit existing page */
             <Route path=':id' component={Page}/> /* See page detail */
             <Route path='/notfound' page='notfound' component={Page}/> /* When not found, there can be redirected to /notfound to show the notfound page */
