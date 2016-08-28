@@ -11,10 +11,10 @@ import logModel from '../../models/logModel';
  * @returns {*} React Component
  * @constructor
  */
-const Log = ({log}) => {
+const Log = ({log, loggedIn}) => {
     return (
       <div>
-          <Link to={`/logs/${log.id}/edit`} className="btn btn-lg btn-primary">Edit log</Link>
+          {loggedIn && <Link to={`/logs/${log.id}/edit`} className="btn btn-lg btn-primary">Edit log</Link>}
           <h1>{log.title}</h1>
           <p>{log.body}</p>
       </div>
@@ -58,7 +58,8 @@ function mapStateToProps(state, ownProps) {
     }
 
     return {
-        log
+        log,
+        loggedIn: state.loggedIn
     };
 }
 

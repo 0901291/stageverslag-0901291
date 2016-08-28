@@ -11,7 +11,7 @@ import achievementModel from '../../models/achievementModel';
  * @returns {*} React Component
  * @constructor
  */
-const Achievement = ({achievement}) => {
+const Achievement = ({achievement, loggedIn}) => {
     const references = achievement.references.map(reference =>
       <li key={reference.id}>
           <Link to={`/${reference.content_type}s/${reference.id}`}>{reference.title}</Link>
@@ -20,7 +20,7 @@ const Achievement = ({achievement}) => {
 
     return (
         <div>
-              <Link to={`/achievements/${achievement.id}/edit`} className="btn btn-lg btn-primary">Edit achievement</Link>
+            {loggedIn && <Link to={`/achievements/${achievement.id}/edit`} className="btn btn-lg btn-primary">Edit achievement</Link>}
               <h1>{achievement.title}</h1>
               <p>{achievement.body}</p>
               <span>Status:{' '}
@@ -85,7 +85,8 @@ function mapStateToProps(state, ownProps) {
     }
 
     return {
-        achievement
+        achievement,
+        loggedIn: state.loggedIn
     };
 }
 
@@ -96,7 +97,7 @@ function mapStateToProps(state, ownProps) {
  */
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(achievementActions, dispatch)
+        actions: bindActionCreators(achievementActions, dispatch),
     };
 }
 
