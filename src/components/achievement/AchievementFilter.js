@@ -1,9 +1,11 @@
 import React, {PropTypes} from 'react';
-import TextInput from '../common/TextInput';
 import AdvancedSelect from 'react-select';
 import achievementTypes from '../../models/achievementTypes';
 import statusTypes from '../../models/statusTypes';
 
+/**
+ * AchievementFilter React Component Class
+ */
 class AchievementFilter extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -14,29 +16,31 @@ class AchievementFilter extends React.Component {
             }
         };
 
-        this.onCategoryFilterChange = this.onCategoryFilterChange.bind(this);
-        this.onStatusFilterChange = this.onStatusFilterChange.bind(this);
+        this.onCategoryFilterChange = this.onCategoryFilterChange.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
+        this.onStatusFilterChange = this.onStatusFilterChange.bind(this); // Bind 'this' to function to 'this' in method is Class and not event target
     }
 
-    onCategoryFilterChange(event) {
+    /**
+     * Method gets called when the category filter select's value changes
+     * @param value
+     * @returns {*}
+     */
+    onCategoryFilterChange(value) {
         const filters    = this.state.filters;
-        if(Array.isArray(event)) { // Redux select component calls onChange with value object, not Event object
-            filters.categoryFilter = event;
-        } else {
-            filters.categoryFilter = [];
-        }
-        this.props.onFilterChange(filters);
+        filters.categoryFilter = Array.isArray(value) ? value : [];  // Redux select component calls onChange with value object, not Event object
+        this.props.onFilterChange(filters); // Call onFilterChange method of parent component
         return this.setState({filters});
     }
 
-    onStatusFilterChange(event) {
-        const filters    = this.state.filters;
-        if(Array.isArray(event)) { // Redux select component calls onChange with value object, not Event object
-            filters.statusFilter = event;
-        } else {
-            filters.statusFilter = [];
-        }
-        this.props.onFilterChange(filters);
+    /**
+     * Method gets called when the category filter select's value changes
+     * @param value
+     * @returns {*}
+     */
+    onStatusFilterChange(value) {
+        const filters = this.state.filters;
+        filters.statusFilter = Array.isArray(value) ? value : []; // Redux select component calls onChange with value object, not Event object
+        this.props.onFilterChange(filters); // Call onFilterChange method of parent component
         return this.setState({filters});
     }
 
