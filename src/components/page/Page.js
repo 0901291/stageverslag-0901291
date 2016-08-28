@@ -14,7 +14,7 @@ import pageModel from '../../models/pageModel';
  * @returns {*} React Component
  * @constructor
  */
-const Page = ({page, data}) => {
+const Page = ({page, data, loggedIn}) => {
     let OverviewPage;
     switch (page.overview_type) { // Generically switch on overview type to allow a view mode per overview type
         case 'achievement':
@@ -29,11 +29,11 @@ const Page = ({page, data}) => {
     }
     return (
       <div className='overview-page'>
-          {page.type === 'overview' &&
+          {loggedIn && page.type === 'overview' &&
           <Link to={`/${page.overview_type}s/add`} className="btn btn-primary btn-lg">Add
               new {page.overview_type}</Link>}
-          <Link to={`/pages/${page.id}/edit`}
-                className={`btn btn-lg ${page.type !== 'overview' ? ' btn-primary' : ''}`}>Edit page</Link>
+          {loggedIn && <Link to={`/pages/${page.id}/edit`}
+                className={`btn btn-lg ${page.type !== 'overview' ? ' btn-primary' : ''}`}>Edit page</Link>}
           <h1>{page.title}</h1>
           <p>{page.body}</p>
           {page.type === 'overview' && <OverviewPage data={data}/>}
@@ -81,7 +81,8 @@ function mapStateToProps(state, ownProps) {
 
     return {
         page,
-        data
+        data,
+        loggedIn: state.loggedIn
     };
 }
 

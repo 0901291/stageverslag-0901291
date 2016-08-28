@@ -21,7 +21,6 @@ class AchievementList extends React.Component {
     }
 
     onFilterChange(filters) {
-        console.log(filters);
         const achievements = this.state.achievements || [];
         const filteredAchievements = achievements.filter(achievement => {
             return (Object.keys(filters).length > 0 && ((
@@ -35,7 +34,6 @@ class AchievementList extends React.Component {
                 filters.statusFilter.find(status => status.value === achievement.status.value))
             );
         });
-        console.log(filteredAchievements);
         this.setState({filteredAchievements});
     }
 

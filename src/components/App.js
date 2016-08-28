@@ -10,12 +10,13 @@ import {connect} from 'react-redux';
  * @returns {*} React Component
  * @constructor
  */
-const App = ({loading, pages, children}) => {
+const App = ({loading, pages, children, loggedIn}) => {
     return (
       <div className="container-fluid">
           <Header
             loading={loading}
             pages={pages}
+            loggedIn={loggedIn}
           />
           {children}
       </div>
@@ -24,7 +25,8 @@ const App = ({loading, pages, children}) => {
 
 App.propTypes = {
     children: PropTypes.object.isRequired,
-    loading: PropTypes.bool.isRequired
+    loading: PropTypes.bool.isRequired,
+    loggedIn: PropTypes.bool.isRequired
 };
 
 /**
@@ -36,7 +38,8 @@ App.propTypes = {
 function mapStateToProps(state, ownProps) {
     return {
         loading: state.numAjaxCallsInProgress > 0,
-        pages: state.pages
+        pages: state.pages,
+        loggedIn: state.loggedIn
     };
 }
 

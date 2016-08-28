@@ -23,11 +23,12 @@ const Achievement = ({achievement}) => {
               <Link to={`/achievements/${achievement.id}/edit`} className="btn btn-lg btn-primary">Edit achievement</Link>
               <h1>{achievement.title}</h1>
               <p>{achievement.body}</p>
-              <span>
+              <span>Status:{' '}
                   <i className={`glyphicon ${achievement.status && achievement.status.class}`}></i>
                   {' '}
                   {achievement.status && achievement.status.label}
               </span>
+              <p>Category: {achievement.type}</p>
               <h2>References</h2>
               <p>Read more about this achievement on any of the following pages and/or log items.</p>
               <ol>

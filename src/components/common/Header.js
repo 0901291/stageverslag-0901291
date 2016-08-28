@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {IndexLink} from 'react-router';
+import LogInToggle from './LogInToggle';
 
 /**
  * Header Component
@@ -7,8 +8,8 @@ import {IndexLink} from 'react-router';
  * @returns {*} React Component
  * @constructor
  */
-const Header = ({pages}) => {
-    const links = pages.filter(page => page.show_nav).map((page, key) => { // Filter out pages with the show_nav property set to false and map remaining pages to header links
+const Header = ({pages, loggedIn}) => {
+    const links = pages.filter(page => page.show_nav).filter(page => page.access === true || loggedIn).map((page, key) => { // Filter out pages with the show_nav property set to false and map remaining pages to header links
         let link = '/';
         if (page.id !== 'home') { // Home link should be just a /, not /home
             link += page.id;
@@ -17,6 +18,7 @@ const Header = ({pages}) => {
     });
     return (
       <div>
+          <LogInToggle loggedIn={loggedIn}/>
           <nav>
               {links}
           </nav>
