@@ -21,7 +21,7 @@ class LogInToggle extends React.Component {
     onToggle(event) {
         event.preventDefault();
         this.props.actions.toggleLogIn(); // Dispatch toggle action
-        toastr.success(`You are now logged ${this.props.loggedIn ? 'in' : 'out'}`);
+        toastr.success(`You are now logged ${this.props.loggedIn ? 'out' : 'in'}`);
     }
 
     render() {
