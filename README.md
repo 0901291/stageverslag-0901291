@@ -25,20 +25,22 @@ Stageverslag-0901291 is a web-app in ReactJS with the power of Redux behind it. 
 
 ## README for school
 ### Explaination (requirements)
-- The app should be cool
+- *The app should be cool*
   - This app is cool, because now I can manage my internship at Burst and during the internship I can develop some more on this application. Nice as well is the link between an achievement and references. I heard it could be hard to keep track of all of your progress during your internship, so this system could simplify that.
-- The app should give the student enough profundity
+- *The app should give the student enough profundity*
   - It did, because the link I mentioned before was tricky. Also the use of Redux with ReactJS was, tho a good one, really tough to come by. It was really hard to grasp the data flow that Redux uses. When building the ManagePage component, the flow came to me. The server side rendering was hard as well. In the end it was worth it, but it forces you to constantly take into account that the server is no browser.
-- The app uses at least 3 objects, of which 1 has a extend relation
+- *The app uses at least 3 objects, of which 1 has a extend relation*
   - In spite of models not really being a thing in React, I made really good use of them. I used models as default values for my object, for when no data was found or received yet. Also extending objects or models is not of any use in React, but React Component do extend from the React.Component, and Child Component use a lot of data of their parent ones. Models I used are to be found in the /src/models folder, e.g. achievementModel.js.
 heeft met een ander object.
-- It makes sense to use a MV* pattern with this app.
+- *It makes sense to use a MV* pattern with this app*
   - It totally does, due to the different views and data coming together on various routes.
-- Multiple events are needed to make the app work
+- *Multiple events are needed to make the app work*
   - Because React uses an application state, and every component can have a state as well, events are very much needed to control the data. In forms, for instance, every field has an onChange listener, so when the field value changes, the component state gets updated on the fly. When the form gets submitted, another event is triggered to edit the application state.
-- Is makes sense to use ES2015 with the app
+- *Is makes sense to use ES2015 with the app*
   - Because of the Component Classes, the spread operator, the Object.assign(), the Promises, destructering objects, and many more the app's source code is really neat and clean and can be maintained easely in the future.
+
 ### Testing browsersupport (screenshots)
+
 #### IE 11
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3Y0lQVlpQRVYxU00/view?usp=sharing">Pages (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3S0ZmSzFfWndOVWs/view?usp=sharing">Pages (logged out)</a>
@@ -46,6 +48,7 @@ heeft met een ander object.
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3TGlHX0ZQcC1hNzg/view?usp=sharing">Edit achievement (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3aHlHUV9NeFl4eWc/view?usp=sharing">Achievements with filter (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3OE1GRGZ5OEIyREE/view?usp=sharing">Achievement detail page (logged in)</a>
+
 #### Chrome 52
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3TGRsWDdKSUtrMjg/view?usp=sharing">Pages (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3MHY5RlgwdmZlUGc/view?usp=sharing">Pages (logged out)</a>
@@ -53,6 +56,7 @@ heeft met een ander object.
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3N3VyMERKLTJmU0k/view?usp=sharing">Edit achievement (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3WVduNnNxcUx4ZHM/view?usp=sharing">Achievements with filter (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3RGVDV25PQWRNYnM/view?usp=sharing">Achievement detail page (logged in)</a>
+
 #### Firefox 48
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3YjQ1a1NfbFFNWXc/view?usp=sharing">Pages (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3aDFMNTVsLUx6eFE/view?usp=sharing">Pages (logged out)</a>
@@ -60,6 +64,7 @@ heeft met een ander object.
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3NW0yZEpYY3JJUFE/view?usp=sharing">Edit achievement (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3bm9jT3ZfU0hHQW8/view?usp=sharing">Achievements with filter (logged in)</a>
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3bmRWTklzcjI0bzg/view?usp=sharing">Achievement detail page (logged in)</a>
+
 #### JS Disabled
 - <a href="https://drive.google.com/file/d/0B4ZATWdHNFp3Q3JNaUVDSU9xTFE/view?usp=sharing">Achievement overview without JavaScript (logged in)</a>
 
